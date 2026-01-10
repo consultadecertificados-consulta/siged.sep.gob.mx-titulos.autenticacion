@@ -16,7 +16,7 @@
     <div id="div-sub-navbar"></div>
 
     <div>
-        <img class="img-background" src="images/bnr_documentos.png">
+        <img class="img-background" src="images/bnr_documentos.png" style="width: 100%;">
     </div>
 
     <div class="container container-top">
@@ -29,160 +29,125 @@
     </div>
 
     <div class="container bc_title" style="margin-top: 0vh; margin-bottom: -3vh">
-            <div class="row">
-                <div class="col-sm-8">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
-                        <li class="breadcrumb-item"><a href="index.html#consultas">Consultas</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="#">Documentos académicos electrónicos</a></li>
-                    </ol>
-                </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="index.html#consultas">Consultas</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="#">Documentos académicos electrónicos</a></li>
+                </ol>
             </div>
-        </div>  
+        </div>
+    </div>  
     <br>
-    <main id="search" ng-controller="documentosController">
-
-        <div class="container container-form mt-2" >
-            <form class="form" ng-submit="getConsultaByFOLIO(folio);">
+    
+    <main id="search">
+        <div class="container container-form mt-2">
+            <form class="form" onsubmit="event.preventDefault(); buscarEnBase();">
                 <div class="row">
                     <div class="column col-lg-6">
-                      <div class="form-group  mb-2">
+                      <div class="form-group mb-2">
                         <label for="folio" class="sr-only">Folio</label>
-                        <input id="folio" type="text" placeholder="Ingrese el folio"
-                                class="form-control mt-3"
-                                required
-                                ng-model="folio" >
+                        <input id="folio" type="text" placeholder="Ingrese el folio" class="form-control mt-3" required style="text-transform: uppercase;">
                       </div>
                     </div>
                     <div class="column col-lg-3 col-md-6 col-sm-6">
-                        <button id="btn-buscar" type="submit" class="btn btn-active btn-width mt-2">Buscar</button>
+                        <button type="submit" class="btn btn-active btn-width mt-2">Buscar</button>
                     </div>
                     <div class="column col-lg-3 col-md-6 col-sm-6">
-                        <button id="btn-restablecer" type="reset" class="btn btn-secondary active btn-width mt-2" 
-                                    ng-click="newSearch()">Restablecer</button>
+                        <button type="button" class="btn btn-secondary active btn-width mt-2" onclick="location.reload();">Restablecer</button>
                     </div>
                 </div>
             </form>
             <div class="mt-3">
-                <a href="archivos/UbicaFolio.pdf" class="btn-link link-color" target="_blank" title="Ubica el folio en tu certificado">Ubica el folio en tu certificado
-                </a>
+                <a href="archivos/UbicaFolio.pdf" class="btn-link link-color" target="_blank">Ubica el folio en tu certificado</a>
             </div>
         </div>
 
-        <div class="container" id="divResultsWithoutData">
-            <section id="sectionResultWithoutData" style="display:none;">
-                <div data-role="page" >
-                    <div class="top-buffer-submenu">
-                        <p class="titulo_subtexto" title="Información no encontrada">Información no encontrada</p>
-                        <hr class="red">
-                        <section style="margin: 20px;">
-                            <div class="alert alert-danger" >
-                                <p title="La información solicitada no se encuentra en nuestros registros"><b>La información solicitada no se encuentra en nuestros registros.</b></p>
-                                <br>
-                                <p title="Verifica los datos que ingresaste y vuelve a intentarlo.">Verifica los datos que ingresaste y vuelve a intentarlo.</p>
-                                <br>
-                                <button class="btn btn-danger bnt-nvo-intento" type="reset" ng-click="newSearch()" onclick="location.reload();" title="Volver a intentarlo">Volver a intentarlo</button>
-                            </div>
-                        </section>
-                    </div>
+        <div class="container" id="sectionResultWithoutData" style="display:none; margin-top: 30px;">
+            <div class="top-buffer-submenu">
+                <p class="titulo_subtexto">Información no encontrada</p>
+                <hr class="red">
+                <div class="alert alert-danger">
+                    <p><b>La información solicitada no se encuentra en nuestros registros.</b></p>
+                    <p>Verifica los datos que ingresaste y vuelve a intentarlo.</p>
+                    <br>
+                    <button class="btn btn-danger" onclick="location.reload();">Volver a intentarlo</button>
                 </div>
-            </section>
+            </div>
         </div>
 
-       <div class="container" id="divResultsWithData">
-            <section id="sectionResultWithData" style="display:none; margin-top: 5vh ">
-                <div class="mb-5">
-                    <div class="row">
-                        <div class="column col-12">
-                            <p class="titulo_subtexto" id="detalle" title="Detalle del documento"><span>Detalle del documento</span></p>
-                            <hr class="red">
-                        </div>
-                    </div>
-                    <div class="row align-items-start">
-                        <div class="column col-lg-3 col-md-12 mb-3"><b>Nombre:</b></div>
-                        <div class="column col-lg-9 col-md-12 mb-3">
-                            <span id="res-nombres"></span>
-                        </div>
+        <div class="container" id="sectionResultWithData" style="display:none; margin-top: 5vh;">
+            <p class="titulo_subtexto"><span>Detalle del documento</span></p>
+            <hr class="red">
+            <div class="row align-items-start">
+                <div class="column col-lg-3 col-md-12 mb-3"><b>Nombre:</b></div>
+                <div class="column col-lg-9 col-md-12 mb-3"><span id="res-nombre"></span></div>
 
-                        <div class="column col-lg-3 col-md-12 mb-3"><b>Tipo de estudios:</b></div>
-                        <div class="column col-lg-9 col-md-12 mb-3" style="text-transform: uppercase">
-                            <span id="res-tipoCertificacion"></span>
-                        </div>
+                <div class="column col-lg-3 col-md-12 mb-3"><b>Tipo de estudios:</b></div>
+                <div class="column col-lg-9 col-md-12 mb-3" style="text-transform: uppercase;"><span id="res-plan"></span></div>
 
-                        <div class="column col-lg-3 col-md-12 mb-3"><b>Folio:</b></div>
-                        <div class="column col-lg-9 col-md-12 mb-3">
-                            <span id="res-folio"></span>
-                        </div>                        
+                <div class="column col-lg-3 col-md-12 mb-3"><b>Folio:</b></div>
+                <div class="column col-lg-9 col-md-12 mb-3"><span id="res-folio"></span></div>
 
-                        <div class="column col-lg-3 col-md-12 mb-3"><b>Autoridad emisora:</b></div>
-                        <div class="column col-lg-9 col-md-12 mb-3">
-                            <span id="res-institucion"></span>
-                        </div>                        
+                <div class="column col-lg-3 col-md-12 mb-3"><b>Autoridad emisora:</b></div>
+                <div class="column col-lg-9 col-md-12 mb-3"><span id="res-emisor"></span></div>
 
-                        <div class="column col-lg-3 col-md-12 mb-3"><b>Fecha de registro:</b></div>
-                        <div class="column col-lg-9 col-md-12 mb-3">
-                            <span id="res-fecha"></span>
-                        </div>
-                    </div>
+                <div class="column col-lg-3 col-md-12 mb-3"><b>Fecha de registro:</b></div>
+                <div class="column col-lg-9 col-md-12 mb-3"><span id="res-fecha"></span></div>
+            </div>
 
-                    <div class="row">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-3 alert-datos-incial alert alert-success text-center">
-                            <h5><b>Promedio:</b></h5>
-                            <p><span id="res-promedio"></span></p>
-                        </div>
-                        <div class="col-md-1"></div>
-                        <div class="col-md-3 alert-datos-incial alert alert-info text-center">
-                            <h5><b>Estatus:</b></h5>
-                            <h5><span id="res-estatus" style="text-transform: capitalize"></span></h5>
-                        </div>
-                    </div>
+            <div class="row justify-content-center">
+                <div class="col-md-3 alert alert-success text-center">
+                    <h5><b>Promedio:</b></h5>
+                    <p id="res-promedio"></p>
                 </div>
-            </section>
+                <div class="col-md-1"></div>
+                <div class="col-md-3 alert alert-info text-center">
+                    <h5><b>Estatus:</b></h5>
+                    <h5 id="res-estatus" style="text-transform: capitalize;"></h5>
+                </div>
+            </div>
         </div>
     </main>
 
     <script src="folios.js"></script>
 
     <script>
-        // Lógica mínima para conectar tu HTML con folios.js
-        function getConsultaByFOLIO(folioIngresado) {
-            var f = (folioIngresado || document.getElementById('folio').value).trim().toUpperCase();
-            var dataDiv = document.getElementById('sectionResultWithData');
-            var noDataDiv = document.getElementById('sectionResultWithoutData');
-            
-            dataDiv.style.display = 'none';
-            noDataDiv.style.display = 'none';
+        function buscarEnBase() {
+            const inputFolio = document.getElementById('folio').value.trim().toUpperCase();
+            const divConDatos = document.getElementById('sectionResultWithData');
+            const divSinDatos = document.getElementById('sectionResultWithoutData');
 
-            if (window.baseDatos && window.baseDatos[f]) {
-                var d = window.baseDatos[f];
-                document.getElementById('res-nombres').innerText = d.nombre;
-                document.getElementById('res-tipoCertificacion').innerText = d.plan;
-                document.getElementById('res-folio').innerText = f;
-                document.getElementById('res-institucion').innerText = d.plantel + " - " + d.emisor;
-                document.getElementById('res-fecha').innerText = d.timbrado;
-                document.getElementById('res-promedio').innerText = d.promedio;
-                document.getElementById('res-estatus').innerText = d.estatus;
+            divConDatos.style.display = 'none';
+            divSinDatos.style.display = 'none';
+
+            // Comprobar si existe el folio en la variable baseDatos de folios.js
+            if (window.baseDatos && window.baseDatos[inputFolio]) {
+                const data = window.baseDatos[inputFolio];
                 
-                dataDiv.style.display = 'block';
+                // Llenar los campos con tu estructura original
+                document.getElementById('res-nombre').innerText = data.nombre;
+                document.getElementById('res-plan').innerText = data.plan;
+                document.getElementById('res-folio').innerText = inputFolio;
+                document.getElementById('res-emisor').innerText = data.plantel + " - " + data.emisor;
+                document.getElementById('res-fecha').innerText = data.timbrado;
+                document.getElementById('res-promedio').innerText = data.promedio;
+                document.getElementById('res-estatus').innerText = data.estatus;
+
+                divConDatos.style.display = 'block';
             } else {
-                noDataDiv.style.display = 'block';
+                divSinDatos.style.display = 'block';
             }
         }
 
-        // Sobrescribimos la función para que el formulario la use
-        document.querySelector('form').onsubmit = function(e) {
-            e.preventDefault();
-            getConsultaByFOLIO();
-        };
-
-        // Soporte QR intacto
+        // Lógica para QR intacta
         window.onload = function() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var fQR = urlParams.get('folio');
-            if (fQR) {
-                document.getElementById('folio').value = fQR.toUpperCase();
-                getConsultaByFOLIO(fQR);
+            const params = new URLSearchParams(window.location.search);
+            const f = params.get('folio');
+            if (f) {
+                document.getElementById('folio').value = f.toUpperCase();
+                buscarEnBase();
             }
         };
     </script>
