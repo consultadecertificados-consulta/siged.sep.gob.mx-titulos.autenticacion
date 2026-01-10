@@ -12,10 +12,12 @@
         :root {
             --gob-guinda: #621132; 
             --gob-guinda-claro: #9D2449;
+            --sep-rojo: #A42145; /* Rojo Institucional SEP */
             --gob-oro: #9D843E;   
             --gob-verde-oscuro: #11322B; 
             --gob-gris-boton: #757575;   
-            --gob-verde-exito: #28a745;
+            --acc-bg: #EAEAEA;
+            --acc-rosa-icono: #C28497;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,10 +32,10 @@
             min-height: 100vh;
         }
 
-        /* --- ESTILOS ACCESIBILIDAD (SEGÚN IMAGEN) --- */
+        /* --- PANEL DE ACCESIBILIDAD --- */
         .acc-panel-sidebar {
             position: fixed; left: -320px; top: 0; width: 300px; height: 100vh;
-            background: #EAEAEA; z-index: 9999; transition: 0.3s ease;
+            background: var(--acc-bg); z-index: 9999; transition: 0.3s ease;
             padding: 20px 15px; font-family: 'Montserrat', sans-serif;
             box-shadow: 2px 0 10px rgba(0,0,0,0.2); overflow-y: auto;
         }
@@ -43,21 +45,20 @@
             background: var(--gob-guinda-claro); color: white; padding: 15px 10px;
             border-radius: 0 5px 5px 0; cursor: pointer; z-index: 10000;
         }
-        .acc-item { display: flex; align-items: center; margin-bottom: 12px; cursor: pointer; color: #B37185; font-size: 13px; font-weight: 600; line-height: 1.2; }
-        .acc-icon-box {
-            width: 45px; height: 45px; background: #C28497; border-radius: 8px;
-            display: flex; align-items: center; justify-content: center;
-            margin-right: 15px; color: white; font-size: 20px; flex-shrink: 0;
-        }
         .acc-reset-btn {
             background: var(--gob-guinda-claro); color: white; display: flex; align-items: center;
             padding: 12px; border-radius: 8px; margin-bottom: 25px; cursor: pointer; font-weight: bold;
         }
-        /* Funciones visuales */
+        .acc-item { display: flex; align-items: center; margin-bottom: 12px; cursor: pointer; color: #B37185; font-size: 13px; font-weight: 600; }
+        .acc-icon-box {
+            width: 45px; height: 45px; background: var(--acc-rosa-icono); border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            margin-right: 15px; color: white; font-size: 20px; flex-shrink: 0;
+        }
         .grayscale-mode { filter: grayscale(100%); }
         .dyslexic-mode { font-family: 'OpenDyslexic', sans-serif !important; }
 
-        /* Navegación Superior Estilo gob.mx */
+        /* Navegación Superior */
         nav.gob-header {
             background-color: #0B231E;
             padding: 10px 50px;
@@ -70,19 +71,11 @@
         .nav-links-gob a { color: white; text-decoration: none; font-size: 14px; font-family: 'Montserrat', sans-serif; }
 
         .header-image-container { 
-            width: 100%; 
-            height: auto; 
-            border-bottom: 8px solid var(--gob-oro); 
-            background: #fff;
+            width: 100%; height: auto; border-bottom: 8px solid var(--gob-oro); background: #fff;
         }
-        .header-image-container img { 
-            width: 100%; 
-            height: auto; 
-            display: block; 
-        }
+        .header-image-container img { width: 100%; height: auto; display: block; }
 
-        .barra-oro { background-color: var(--gob-guinda); height: 8px; }
-
+        /* Contenido Principal */
         main { flex: 1; max-width: 1000px; margin: 40px auto; padding: 0 20px; text-align: center; width: 100%; }
 
         .titulos-sep { margin-bottom: 30px; font-family: 'Montserrat', sans-serif; }
@@ -95,31 +88,23 @@
         .search-container {
             background: #ffffff;
             border-top: 4px solid var(--gob-guinda-claro);
-            border-radius: 4px;
-            padding: 40px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 4px; padding: 40px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
         input[type="text"] {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 18px;
-            margin-bottom: 25px;
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
+            width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 4px;
+            font-size: 18px; margin-bottom: 25px; font-family: 'Montserrat', sans-serif; text-transform: uppercase;
         }
 
         .button-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
 
         .btn-buscar { 
-            background-color: var(--gob-verde-oscuro); 
+            background-color: var(--sep-rojo); 
             color: white; padding: 12px 40px; border: none; border-radius: 4px;
             font-family: 'Montserrat', sans-serif; font-weight: 700; cursor: pointer;
             transition: 0.3s;
         }
-        .btn-buscar:hover { background-color: #1a4d42; transform: translateY(-2px); }
+        .btn-buscar:hover { background-color: var(--gob-guinda); transform: translateY(-2px); }
 
         .btn-restablecer { 
             background-color: var(--gob-gris-boton); 
@@ -127,9 +112,11 @@
             font-family: 'Montserrat', sans-serif; cursor: pointer;
         }
 
+        /* Resultados con Rojo SEP */
         #resultado { 
             display: none; margin-top: 40px; text-align: left; background: white; 
             padding: 30px; border-radius: 8px; border: 1px solid #ddd;
+            border-left: 5px solid var(--sep-rojo);
             box-shadow: 0 4px 15px rgba(0,0,0,0.1); animation: fadeIn 0.5s;
             margin-bottom: 50px;
         }
@@ -143,22 +130,18 @@
         .info-value { font-weight: 400; color: #555; font-size: 15px; display: block; margin-top: 3px; }
 
         .badge-registro {
-            background-color: var(--gob-verde-exito);
+            background-color: var(--gob-guinda-claro);
             color: white; padding: 3px 10px; border-radius: 4px; font-weight: 700; font-size: 12px;
         }
 
+        /* Footer */
         footer { background-color: #13322B; color: white; padding: 50px 0 20px 0; font-family: 'Montserrat', sans-serif; }
         .footer-container { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; padding: 0 20px; }
         .footer-col h4 { font-size: 16px; margin-bottom: 20px; border-bottom: 1px solid var(--gob-oro); display: inline-block; padding-bottom: 5px; }
         .footer-col a { color: white; text-decoration: none; display: block; font-size: 13px; margin-bottom: 10px; opacity: 0.8; }
-        .footer-col a:hover { opacity: 1; text-decoration: underline; }
         .footer-bottom { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 12px; opacity: 0.6; }
 
-        @media (max-width: 600px) {
-            .grid-resultados { grid-template-columns: 1fr; }
-            nav.gob-header { padding: 10px 20px; }
-            .nav-links-gob { display: none; }
-        }
+        @media (max-width: 600px) { .grid-resultados { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -186,7 +169,7 @@
     <ul class="nav-links-gob">
         <li><a href="https://www.gob.mx/tramites">Trámites</a></li>
         <li><a href="https://www.gob.mx/gobierno">Gobierno</a></li>
-        <li><a href="https://www.gob.mx/busqueda"><i class="fas fa-search"></i></a></li>
+        <li><a href="#"><i class="fas fa-search"></i></a></li>
     </ul>
 </nav>
 
@@ -213,8 +196,8 @@
     </div>
 
     <div id="resultado">
-        <div style="margin-bottom: 20px; border-left: 5px solid var(--gob-verde-exito); padding-left: 15px;">
-            <h4 style="font-family: 'Montserrat'; color: var(--gob-verde-oscuro);">Resultado de la Validación</h4>
+        <div style="margin-bottom: 20px;">
+            <h4 style="font-family: 'Montserrat'; color: var(--sep-rojo);">Resultado de la Validación</h4>
             <p style="font-size: 13px; color: #666;">El documento ha sido localizado y autenticado exitosamente.</p>
         </div>
         <div id="infoDetalle" class="grid-resultados"></div>
@@ -224,31 +207,24 @@
 <footer>
     <div class="footer-container">
         <div class="footer-col">
-            <a href="https://www.gob.mx">
-                <img src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" width="150" style="filter: brightness(0) invert(1); margin-bottom: 20px;">
-            </a>
+            <img src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" width="150" style="filter: brightness(0) invert(1); margin-bottom: 20px;">
         </div>
         <div class="footer-col">
             <h4>Enlaces</h4>
             <a href="https://participa.gob.mx" target="_blank">Participa</a>
             <a href="https://www.gob.mx/publicaciones" target="_blank">Publicaciones Oficiales</a>
-            <a href="http://www.ordenjuridico.gob.mx" target="_blank">Marco Jurídico</a>
-            <a href="https://consultapublicamx.inai.org.mx/vut-web/" target="_blank">Plataforma Nacional de Transparencia</a>
         </div>
         <div class="footer-col">
             <h4>¿Qué es gob.mx?</h4>
-            <a href="https://www.gob.mx/que-es-gobmx" target="_blank">Declaración de Accesibilidad</a>
-            <a href="https://www.gob.mx/aviso_de_privacidad" target="_blank">Aviso de Privacidad Integral</a>
             <a href="https://www.gob.mx/terminos" target="_blank">Términos y Condiciones</a>
-            <a href="https://www.gob.mx/terminos#medidas-seguridad-informacion" target="_blank">Política de Seguridad</a>
+            <a href="https://www.gob.mx/aviso_de_privacidad" target="_blank">Aviso de Privacidad</a>
         </div>
         <div class="footer-col">
             <h4>Contacto</h4>
-            <a href="https://www.gob.mx/tramites/ficha/presentacion-de-quejas-y-denuncias-en-la-sfp/SFP54" target="_blank">Denuncias</a>
             <a href="mailto:controlescolar.estatal@sems.sidgbe.gob.mx">Mesa de ayuda</a>
             <div style="margin-top: 15px;">
-                <a href="https://www.facebook.com/gobmexico" target="_blank" style="display:inline; margin-right:15px; color:white;"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://twitter.com/gobmx" target="_blank" style="display:inline; color:white;"><i class="fab fa-twitter"></i></a>
+                <a href="#" style="color:white; margin-right:15px;"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" style="color:white;"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
     </div>
@@ -260,21 +236,18 @@
 <script src="folios.js"></script>
 
 <script>
-    // FUNCIONES ACCESIBILIDAD
     function resetAcc() {
         document.body.classList.remove('grayscale-mode', 'dyslexic-mode');
     }
 
-    // FUNCIONES DE BÚSQUEDA ORIGINALES
     function ejecutarBusqueda(folioKey) {
         if (!folioKey) return;
-        
         const folio = folioKey.trim().toUpperCase();
         const resDiv = document.getElementById('resultado');
         const detalle = document.getElementById('infoDetalle');
 
-        if (baseDatos[folio]) {
-            const d = baseDatos[folio];
+        if (window.baseDatos && window.baseDatos[folio]) {
+            const d = window.baseDatos[folio];
             detalle.innerHTML = `
                 <div class="info-item"><span class="info-label">Nombre del Alumno:</span> <span class="info-value">${d.nombre}</span></div>
                 <div class="info-item"><span class="info-label">Matrícula:</span> <span class="info-value">${d.matricula}</span></div>
@@ -298,37 +271,28 @@
     }
 
     function buscar() {
-        const folio = document.getElementById('folioInput').value;
-        if (!folio) {
-            alert("Por favor, ingrese un folio.");
-            return;
-        }
-        ejecutarBusqueda(folio);
+        const f = document.getElementById('folioInput').value;
+        if (!f) { alert("Por favor, ingrese un folio."); return; }
+        ejecutarBusqueda(f);
     }
 
     function restablecer() {
         document.getElementById('folioInput').value = "";
         document.getElementById('resultado').style.display = 'none';
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        if(window.location.search) {
-            window.history.replaceState({}, document.title, window.location.pathname);
-        }
     }
 
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
         const folioQR = urlParams.get('folio');
-        
         if (folioQR) {
             document.getElementById('folioInput').value = folioQR.toUpperCase();
             ejecutarBusqueda(folioQR);
         }
     };
-
-    document.getElementById('folioInput').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') buscar();
-    });
 </script>
 
 </body>
 </html>
+
+ 
