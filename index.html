@@ -45,12 +45,10 @@
         .acc-icon { background: var(--acc-pink); color: white; width: 45px; height: 45px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
         .acc-text { color: var(--acc-pink); font-size: 14px; font-weight: 600; line-height: 1.2; }
         
-        /* Clases de apoyo */
         .dyslexic-font { font-family: 'OpenDyslexic', 'Comic Sans MS', sans-serif !important; }
         .high-contrast { background: #000 !important; color: #ffff00 !important; }
         .high-contrast * { background-color: transparent !important; color: #ffff00 !important; border-color: #ffff00 !important; }
-        .large-cursor { cursor: crosshair !important; }
-        .large-cursor * { cursor: crosshair !important; }
+        .large-cursor, .large-cursor * { cursor: crosshair !important; }
 
         /* --- DISEÑO PRINCIPAL --- */
         nav.gob-header { background-color: #0B231E; padding: 10px 50px; display: flex; justify-content: space-between; align-items: center; }
@@ -93,7 +91,6 @@
 <body>
 
 <div class="acc-trigger" onclick="toggleAccPanel()"><i class="fas fa-universal-access fa-2x"></i></div>
-
 <div id="acc-panel">
     <button class="acc-btn-reset" onclick="resetAcc()"><i class="fas fa-undo-alt" style="margin-right:12px"></i> Restablecer</button>
     <div class="acc-option" onclick="applyGrayscale()"><div class="acc-icon"><i class="fas fa-circle-half-stroke"></i></div><div class="acc-text">Cambiar escala de grises</div></div>
@@ -125,7 +122,7 @@
 
     <div class="search-container">
         <p style="text-align: left; font-size: 14px; margin-bottom: 15px; font-family: 'Montserrat';">Ingrese el folio de control para validar el documento:</p>
-        <input type="text" id="folioInput" placeholder="EJ: 2261605051234567890" maxlength="20">
+        <input type="text" id="folioInput" placeholder="INGRESE EL FOLIO" maxlength="30">
         <div class="button-group">
             <button class="btn-buscar" onclick="buscar()">CONSULTAR</button>
             <button class="btn-restablecer" onclick="restablecer()">LIMPIAR</button>
@@ -135,14 +132,14 @@
     <div id="error-container">
         <div style="border-left: 5px solid var(--gob-rojo-error); padding-left: 15px;">
             <h4 style="font-family: 'Montserrat'; color: var(--gob-rojo-error);"><i class="fas fa-exclamation-triangle"></i> Folio No Encontrado</h4>
-            <p style="font-size: 14px; color: #666; margin-top: 10px;">El folio ingresado no coincide con ningún registro en nuestra base de datos. Verifique la información.</p>
+            <p style="font-size: 14px; color: #666; margin-top: 10px;">El folio ingresado no existe en el Registro Nacional. Verifique que sea correcto.</p>
         </div>
     </div>
 
     <div id="resultado">
         <div style="margin-bottom: 20px; border-left: 5px solid var(--gob-verde-exito); padding-left: 15px;">
             <h4 style="font-family: 'Montserrat'; color: var(--gob-verde-oscuro);">Resultado de la Validación</h4>
-            <p style="font-size: 13px; color: #666;">El documento ha sido localizado y autenticado exitosamente.</p>
+            <p style="font-size: 13px; color: #666;">Documento autenticado exitosamente.</p>
         </div>
         <div id="infoDetalle" class="grid-resultados"></div>
     </div>
@@ -151,8 +148,8 @@
 <footer>
     <div class="footer-container">
         <div class="footer-col"><img src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" width="150" style="filter: brightness(0) invert(1);"></div>
-        <div class="footer-col"><h4>Enlaces</h4><a href="#">Participa</a><a href="#">Publicaciones</a></div>
-        <div class="footer-col"><h4>Contacto</h4><a href="#">Denuncias</a><a href="#">Mesa de ayuda</a></div>
+        <div class="footer-col"><h4>Enlaces</h4><a href="#">Participa</a><a href="#">Marco Jurídico</a></div>
+        <div class="footer-col"><h4>Contacto</h4><a href="#">Mesa de ayuda</a></div>
     </div>
     <div class="footer-bottom">SEP | SEMS | 2026</div>
 </footer>
@@ -160,7 +157,7 @@
 <script src="folios.js"></script>
 
 <script>
-    // ACCESIBILIDAD
+    // FUNCIONES ACCESIBILIDAD
     function toggleAccPanel() { document.getElementById('acc-panel').classList.toggle('active'); }
     function resetAcc() { document.body.style.filter = "none"; document.body.style.lineHeight = "normal"; document.body.classList.remove('dyslexic-font', 'high-contrast', 'large-cursor'); }
     function applyGrayscale() { document.body.style.filter = (document.body.style.filter === "grayscale(100%)") ? "none" : "grayscale(100%)"; }
@@ -169,9 +166,11 @@
     function toggleSpacing() { document.body.style.lineHeight = (document.body.style.lineHeight === "2.2") ? "normal" : "2.2"; }
     function toggleCursor() { document.body.classList.toggle('large-cursor'); }
 
-    // BÚSQUEDA Y QR
+    // LÓGICA DE BÚSQUEDA INTEGRADA
     function ejecutarBusqueda(folioKey) {
         if (!folioKey) return;
+        
+        // Limpiamos el folio de espacios y lo pasamos a mayúsculas
         const folio = folioKey.trim().toUpperCase();
         const resDiv = document.getElementById('resultado');
         const errDiv = document.getElementById('error-container');
@@ -180,8 +179,11 @@
         resDiv.style.display = 'none';
         errDiv.style.display = 'none';
 
-        if (window.baseDatos && baseDatos[folio]) {
-            const d = baseDatos[folio];
+        // Intentamos obtener la base de datos de folios.js
+        const DB = window.baseDatos || (typeof baseDatos !== 'undefined' ? baseDatos : null);
+
+        if (DB && DB[folio]) {
+            const d = DB[folio];
             detalle.innerHTML = `
                 <div class="info-item"><span class="info-label">Nombre del Alumno:</span> <span class="info-value">${d.nombre}</span></div>
                 <div class="info-item"><span class="info-label">Matrícula:</span> <span class="info-value">${d.matricula}</span></div>
@@ -202,9 +204,9 @@
     }
 
     function buscar() {
-        const folio = document.getElementById('folioInput').value;
-        if (!folio) { alert("Ingrese un folio."); return; }
-        ejecutarBusqueda(folio);
+        const input = document.getElementById('folioInput');
+        if (!input.value) { alert("Por favor, ingrese un folio."); return; }
+        ejecutarBusqueda(input.value);
     }
 
     function restablecer() {
@@ -214,13 +216,13 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // ESTA FUNCIÓN CONSERVA LA LECTURA POR QR
+    // SOPORTE PARA QR
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
         const folioQR = urlParams.get('folio');
         if (folioQR) {
             document.getElementById('folioInput').value = folioQR.toUpperCase();
-            ejecutarBusqueda(folioQR);
+            setTimeout(() => { ejecutarBusqueda(folioQR); }, 500);
         }
     };
 
