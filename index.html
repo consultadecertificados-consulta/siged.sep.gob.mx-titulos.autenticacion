@@ -14,7 +14,8 @@
             --gob-oro: #9D843E;   
             --gob-gris-boton: #757575;
             --estatus-verde: #235E3F;
-            /* COLORES DE LAS TARJETAS */
+            
+            /* COLORES DE LAS TARJETAS (SEGÚN IMAGEN) */
             --bg-verde-tarjeta: #E3F2E1;
             --border-verde-tarjeta: #B7D9B1;
             --texto-verde-tarjeta: #3D7A34;
@@ -42,7 +43,7 @@
             transition: 0.3s;
         }
 
-        /* PANEL ACCESIBILIDAD ORIGINAL */
+        /* PANEL ACCESIBILIDAD */
         .acc-panel-sidebar {
             position: fixed; left: -320px; top: 0; width: 280px; height: 100vh;
             background: #fff; z-index: 99999; transition: 0.4s;
@@ -61,7 +62,7 @@
             text-align: center; font-weight: 600; color: #333; border: none;
         }
 
-        /* HEADER ORIGINAL */
+        /* HEADER */
         nav.gob-header {
             background-color: var(--sep-rojo-obscuro);
             padding: 10px 30px; display: flex; justify-content: space-between; align-items: center;
@@ -101,12 +102,8 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         .detalle-header {
-            font-family: 'Montserrat';
-            font-size: 1.3rem;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            position: relative;
+            font-family: 'Montserrat'; font-size: 1.3rem; border-bottom: 1px solid #eee;
+            padding-bottom: 10px; margin-bottom: 20px; position: relative;
         }
         .detalle-header::after {
             content: ""; position: absolute; left: 0; bottom: -1px; width: 40px; height: 4px; background: var(--gob-oro);
@@ -116,39 +113,28 @@
         .info-label { font-weight: 700; color: #333; font-size: 14px; font-family: 'Montserrat'; margin-bottom: 3px; }
         .info-value { font-weight: 400; color: #555; font-size: 15px; }
 
-        /* DISEÑO DE TARJETAS RÉPLICA */
+        /* TARJETAS IGUAL A LA IMAGEN */
         .cards-flex-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 25px 0;
-            flex-wrap: wrap;
+            display: flex; justify-content: center; gap: 15px; margin: 25px 0; flex-wrap: wrap;
         }
         .card-box {
-            flex: 1;
-            min-width: 200px;
-            max-width: 280px;
-            padding: 20px;
-            border-radius: 4px;
-            border: 1px solid;
-            text-align: center;
-            font-family: 'Montserrat', sans-serif;
+            flex: 1; min-width: 200px; max-width: 280px; padding: 25px 15px;
+            border-radius: 4px; border: 1px solid; text-align: center; font-family: 'Montserrat', sans-serif;
         }
         .card-verde { background: var(--bg-verde-tarjeta); border-color: var(--border-verde-tarjeta); color: var(--texto-verde-tarjeta); }
         .card-azul { background: var(--bg-azul-tarjeta); border-color: var(--border-azul-tarjeta); color: var(--texto-azul-tarjeta); }
         
-        .card-box .title { font-weight: 700; font-size: 18px; margin-bottom: 10px; }
+        .card-box .title { font-weight: 700; font-size: 18px; margin-bottom: 12px; }
         .card-box .val-big { font-size: 18px; font-weight: 400; margin-bottom: 5px; }
         .card-box .val-text { font-weight: 700; font-size: 18px; }
 
-        /* AVISO AZUL FINAL */
+        /* AVISO FINAL */
         .aviso-info {
-            background-color: #D9F0F7; border: 1px solid #ADE1F0;
-            padding: 20px; border-radius: 4px; margin-top: 30px;
-            font-size: 14px; color: #316B8C; line-height: 1.5; font-family: 'Montserrat';
+            background-color: #D9F0F7; border: 1px solid #ADE1F0; padding: 20px; border-radius: 4px;
+            margin-top: 30px; font-size: 14px; color: #316B8C; line-height: 1.5; font-family: 'Montserrat';
         }
 
-        /* FOOTER ORIGINAL */
+        /* FOOTER */
         footer { background: var(--sep-rojo-obscuro); color: white; padding: 50px 30px 20px; font-family: 'Montserrat'; margin-top: 50px; }
         .footer-container { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
         .footer-col h4 { margin-bottom: 20px; border-bottom: 2px solid var(--gob-oro); display: inline-block; padding-bottom: 5px; }
@@ -202,21 +188,20 @@
 
     <div id="resultado">
         <h2 class="detalle-header">Detalle del documento</h2>
+        
         <div id="infoDetalle"></div>
         
         <div class="cards-flex-container" id="tarjetasContainer"></div>
 
         <div class="aviso-info">
-            <strong>¡Atención!</strong> La información de los certificados que se muestran en este portal, es el resultado de la integración de información que envían las autoridades educativas de los estados y de la Ciudad de México... (Texto completo según imagen)
+            <strong>¡Atención!</strong> La información de los certificados que se muestran en este portal, es el resultado de la integración de información que envían las autoridades educativas de los estados y de la Ciudad de México...
         </div>
     </div>
 </main>
 
 <footer>
     <div class="footer-container">
-        <div class="footer-col">
-            <img src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" width="150" style="filter: brightness(0) invert(1); margin-bottom: 20px;">
-        </div>
+        <div class="footer-col"><img src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" width="150" style="filter: brightness(0) invert(1);"></div>
         <div class="footer-col">
             <h4>Enlaces</h4>
             <a href="https://participa.gob.mx" target="_blank">Participa</a>
@@ -253,27 +238,36 @@
             const d = baseDatos[f];
             let listContent = "";
             
-            // Lista de datos
-            const campos = ['NOMBRE', 'TIPO_DE_DOCUMENTO', 'FOLIO', 'ESTUDIOS', 'PERIODO_DE_ESTUDIOS', 'FORMACIÓN_LABORAL', 'AUTORIDAD_EMISORA', 'FECHA_DE_REGISTRO_EN_SIGED'];
-            campos.forEach(c => {
-                if(d[c]) listContent += `<div class="info-item"><span class="info-label">${c.replace(/_/g, ' ')}:</span><span class="info-value">${d[c]}</span></div>`;
-            });
+            // BUSQUEDA DINÁMICA: recorre todas las etiquetas presentes en el folio.js
+            for (let clave in d) {
+                let claveL = clave.toLowerCase();
+                
+                // Omitimos los que van en las tarjetas para que no se dupliquen abajo
+                if (claveL === 'promedio' || claveL === 'promedio_texto' || claveL === 'estatus') continue;
 
-            // Tarjetas (Promedio y Estatus)
-            let cardsContent = `
+                let label = clave.replace(/_/g, ' ').toUpperCase();
+                listContent += `
+                    <div class="info-item">
+                        <span class="info-label">${label}:</span>
+                        <span class="info-value">${d[clave]}</span>
+                    </div>
+                `;
+            }
+
+            // Inyectar Tarjetas (Promedio y Estatus)
+            tarjetas.innerHTML = `
                 <div class="card-box card-verde">
                     <div class="title">Promedio:</div>
-                    <div class="val-big">${d.PROMEDIO || '0.0'}</div>
-                    <div class="val-text">${d.PROMEDIO_TEXTO || ''}</div>
+                    <div class="val-big">${d.PROMEDIO || d.promedio || '0.0'}</div>
+                    <div class="val-text">${d.PROMEDIO_TEXTO || d.promedio_texto || ''}</div>
                 </div>
                 <div class="card-box card-azul">
                     <div class="title">Estatus del documento:</div>
-                    <div class="val-text" style="font-weight:400; margin-top:15px;">${d.ESTATUS || 'Registrado'}</div>
+                    <div class="val-text" style="font-weight:400; margin-top:15px;">${d.ESTATUS || d.estatus || 'Registrado'}</div>
                 </div>
             `;
 
             detalle.innerHTML = listContent;
-            tarjetas.innerHTML = cardsContent;
             resDiv.style.display = 'block';
             resDiv.scrollIntoView({ behavior: 'smooth' });
         } else if (f !== "") {
