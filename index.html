@@ -20,8 +20,8 @@
         /* --- ESTADOS DE ACCESIBILIDAD --- */
         .grayscale-mode { filter: grayscale(100%); }
         .high-contrast { background: #000 !important; color: #fff !important; }
-        .high-contrast .search-container, .high-contrast #resultado { background: #222; border-color: #fff; color: #fff; }
-        .increase-text { font-size: 1.15rem; }
+        .high-contrast .search-container, .high-contrast #resultado, .high-contrast main { background: #111 !important; color: #fff !important; }
+        .increase-text { font-size: 1.2rem; }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -34,7 +34,7 @@
             flex-direction: column;
         }
 
-        /* --- ACCESIBILIDAD PANEL --- */
+        /* --- PANEL DE ACCESIBILIDAD --- */
         .acc-panel-sidebar {
             position: fixed; left: -320px; top: 0; width: 280px; height: 100vh;
             background: #fff; z-index: 9999; transition: 0.3s;
@@ -51,9 +51,7 @@
             display: flex; align-items: center; padding: 12px; 
             margin-bottom: 8px; border-radius: 5px; cursor: pointer; 
             background: #f8f8f8; color: #333; font-size: 13px; font-weight: 600;
-            transition: 0.2s;
         }
-        .acc-item:hover { background: #eee; }
         .acc-item i { margin-right: 10px; color: var(--sep-rojo-obscuro); width: 20px; text-align: center; }
         .acc-reset-btn {
             background: var(--sep-rojo-obscuro); color: white; text-align: center;
@@ -107,18 +105,22 @@
         .info-label { font-weight: 700; color: #333; font-size: 11px; text-transform: uppercase; font-family: 'Montserrat'; }
         .badge-registro { background-color: var(--estatus-verde); color: white; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 12px; }
 
-        /* --- FOOTER --- */
-        footer { background-color: var(--sep-rojo-obscuro); color: white; padding: 40px 5% 20px; font-family: 'Montserrat', sans-serif; margin-top: auto; }
+        /* --- FOOTER (RESTAURADO) --- */
+        footer { background-color: var(--sep-rojo-obscuro); color: white; padding: 40px 15px 20px; font-family: 'Montserrat', sans-serif; margin-top: auto; }
+        .footer-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; text-align: left; }
+        .footer-col h4 { font-size: 15px; margin-bottom: 15px; border-bottom: 1px solid var(--gob-oro); display: inline-block; }
+        .footer-col a { color: white; text-decoration: none; display: block; font-size: 12px; margin-bottom: 8px; opacity: 0.8; }
         .footer-bottom { text-align: center; margin-top: 30px; font-size: 10px; opacity: 0.6; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); }
 
         @media (min-width: 600px) {
+            nav.gob-header { padding: 10px 30px; }
             .button-group { flex-direction: row; }
             .btn-buscar, .btn-restablecer { min-width: 160px; }
             .grid-resultados { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
-<body id="mainBody">
+<body>
 
 <div class="acc-trigger" onclick="toggleAccPanel()">
     <i class="fas fa-universal-access fa-2x"></i>
@@ -133,7 +135,9 @@
 </div>
 
 <nav class="gob-header">
-    <a href="https://www.gob.mx"><img class="logo-gob" src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" alt="Gobierno de México"></a>
+    <a href="https://www.gob.mx" target="_blank">
+        <img class="logo-gob" src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" alt="Gobierno de México">
+    </a>
     <ul class="nav-links-gob">
         <li><a href="https://www.gob.mx/tramites">Trámites</a></li>
         <li><a href="https://www.gob.mx/gobierno">Gobierno</a></li>
@@ -141,7 +145,7 @@
 </nav>
 
 <div class="header-image-container">
-    <img src="logo.png" alt="SEP">
+    <a href="index.html"><img src="logo.png" alt="SEP"></a>
 </div>
 
 <main>
@@ -153,38 +157,55 @@
 
     <div class="search-container">
         <p style="text-align: left; font-size: 14px; margin-bottom: 15px; font-family: 'Montserrat';">Ingrese el folio de control:</p>
-        <input type="text" id="folioInput" placeholder="EJ: 123456789" maxlength="30">
+        <input type="text" id="folioInput" placeholder="" maxlength="30">
         <div class="button-group">
             <button class="btn-buscar" onclick="buscar()">CONSULTAR</button>
             <button class="btn-restablecer" onclick="restablecer()">LIMPIAR</button>
         </div>
         <div id="mensajeError">
-            <i class="fas fa-exclamation-triangle"></i> Folio no encontrado.
+            <i class="fas fa-exclamation-triangle"></i> Folio no válido o no encontrado.
         </div>
     </div>
 
     <div id="resultado">
-        <h4 style="font-family: 'Montserrat'; color: var(--sep-rojo-obscuro); margin-bottom: 15px;">Validación Exitosa</h4>
+        <h4 style="font-family: 'Montserrat'; color: var(--sep-rojo-obscuro); margin-bottom: 15px;">Información del Documento</h4>
         <div id="infoDetalle" class="grid-resultados"></div>
     </div>
 </main>
 
 <footer>
+    <div class="footer-container">
+        <div class="footer-col">
+            <a href="https://www.gob.mx" target="_blank">
+                <img src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" width="120" style="filter: brightness(0) invert(1);">
+            </a>
+        </div>
+        <div class="footer-col">
+            <h4>Enlaces</h4>
+            <a href="https://participa.gob.mx">Participa</a>
+            <a href="https://www.gob.mx/publicaciones">Publicaciones</a>
+        </div>
+        <div class="footer-col">
+            <h4>Legal</h4>
+            <a href="https://www.gob.mx/privacidad">Privacidad</a>
+            <a href="https://www.gob.mx/terminos">Términos</a>
+        </div>
+        <div class="footer-col">
+            <h4>Contacto</h4>
+            <a href="mailto:soporte@sems.gob.mx">Soporte Técnico</a>
+        </div>
+    </div>
     <div class="footer-bottom">SEP | SEMS | México 2026</div>
 </footer>
 
 <script src="folios.js"></script>
 <script>
-    // FUNCIONES DE ACCESIBILIDAD
     function toggleAccPanel() { document.getElementById('accPanel').classList.toggle('active'); }
     function toggleGrayscale() { document.body.classList.toggle('grayscale-mode'); }
     function toggleContrast() { document.body.classList.toggle('high-contrast'); }
     function toggleTextSize() { document.body.classList.toggle('increase-text'); }
-    function resetAcc() { 
-        document.body.classList.remove('grayscale-mode', 'high-contrast', 'increase-text'); 
-    }
+    function resetAcc() { document.body.classList.remove('grayscale-mode', 'high-contrast', 'increase-text'); }
 
-    // LÓGICA DE BÚSQUEDA
     function buscar() {
         const f = document.getElementById('folioInput').value.trim().toUpperCase();
         const resDiv = document.getElementById('resultado');
@@ -204,7 +225,7 @@
                 <div class="info-item" style="grid-column: 1/-1;"><span class="info-label">Institución:</span><br>${d.plantel}</div>
             `;
             resDiv.style.display = 'block';
-            resDiv.scrollIntoView({ behavior: 'smooth' });
+            resDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } else {
             errDiv.style.display = 'block';
         }
@@ -214,7 +235,9 @@
         document.getElementById('folioInput').value = "";
         document.getElementById('resultado').style.display = 'none';
         document.getElementById('mensajeError').style.display = 'none';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 </script>
 </body>
 </html>
+      
