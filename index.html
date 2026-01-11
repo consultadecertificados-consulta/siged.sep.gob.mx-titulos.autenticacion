@@ -71,8 +71,13 @@
         .nav-links-gob a { color: white; text-decoration: none; font-size: 14px; font-family: 'Montserrat'; }
 
         .header-image-container { width: 100%; border-bottom: 6px solid var(--gob-oro); background: #fff; padding: 10px 0; }
-        .header-image-container img { width: 100%; max-width: 900px; margin: 0 auto; display: block; height: auto; }
-
+        .header-image-container img {
+    width: 100%;       /* Obliga a la imagen a estirarse al ancho del contenedor */
+    max-width: 100%;    /* Elimina el límite de 900px */
+    height: auto;       /* Mantiene la proporción para que no se vea aplastada */
+    display: block;
+    margin: 0 auto;
+}
         /* CONTENIDO */
         main { flex: 1; max-width: 900px; margin: 30px auto; padding: 0 15px; width: 100%; }
         .titulos-sep { text-align: center; margin-bottom: 30px; font-family: 'Montserrat'; }
