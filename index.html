@@ -11,32 +11,35 @@
     <style>
         :root {
             --sep-rojo-obscuro: #4B1021; 
-            --gob-guinda: #621132; 
             --gob-oro: #9D843E;   
             --gob-gris-boton: #757575;
             --error-rojo: #d32f2f;
-            --estatus-verde: #235E3F; /* Verde institucional para éxito */
+            --estatus-verde: #235E3F;
         }
+
+        /* --- ESTADOS DE ACCESIBILIDAD --- */
+        .grayscale-mode { filter: grayscale(100%); }
+        .high-contrast { background: #000 !important; color: #fff !important; }
+        .high-contrast .search-container, .high-contrast #resultado { background: #222; border-color: #fff; color: #fff; }
+        .increase-text { font-size: 1.15rem; }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Lora', serif;
             background-color: #f4f4f4;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 100 100'%3E%3Cpath d='M0 0l50 50L0 100' stroke='%23d8d8d8' fill='none' stroke-width='1'/%3E%3Cpath d='M100 0L50 50l50 50' stroke='%23d8d8d8' fill='none' stroke-width='1'/%3E%3C/svg%3E");
-            background-attachment: fixed;
+            transition: all 0.3s ease;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
         }
 
-        /* --- ACCESIBILIDAD --- */
+        /* --- ACCESIBILIDAD PANEL --- */
         .acc-panel-sidebar {
             position: fixed; left: -320px; top: 0; width: 280px; height: 100vh;
-            background: #EAEAEA; z-index: 9999; transition: 0.3s;
+            background: #fff; z-index: 9999; transition: 0.3s;
             padding: 20px; font-family: 'Montserrat', sans-serif;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
-            overflow-y: auto;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.3);
         }
         .acc-panel-sidebar.active { left: 0; }
         .acc-trigger {
@@ -44,29 +47,35 @@
             background: var(--sep-rojo-obscuro); color: #FFFFFF;
             padding: 12px 10px; border-radius: 0 5px 5px 0; cursor: pointer; z-index: 10000;
         }
+        .acc-item { 
+            display: flex; align-items: center; padding: 12px; 
+            margin-bottom: 8px; border-radius: 5px; cursor: pointer; 
+            background: #f8f8f8; color: #333; font-size: 13px; font-weight: 600;
+            transition: 0.2s;
+        }
+        .acc-item:hover { background: #eee; }
+        .acc-item i { margin-right: 10px; color: var(--sep-rojo-obscuro); width: 20px; text-align: center; }
+        .acc-reset-btn {
+            background: var(--sep-rojo-obscuro); color: white; text-align: center;
+            padding: 12px; border-radius: 5px; margin-bottom: 20px; cursor: pointer; font-weight: bold;
+        }
 
         /* --- CABECERA --- */
         nav.gob-header {
             background-color: var(--sep-rojo-obscuro);
-            padding: 10px 15px;
-            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 15px; display: flex; justify-content: space-between; align-items: center;
         }
-        .logo-gob { height: 35px; cursor: pointer; }
+        .logo-gob { height: 35px; }
         .nav-links-gob { display: flex; gap: 15px; list-style: none; }
         .nav-links-gob a { color: white; text-decoration: none; font-size: 13px; font-family: 'Montserrat', sans-serif; }
 
-        .header-image-container { 
-            width: 100%; height: auto; border-bottom: 6px solid var(--gob-oro); background: #fff;
-        }
+        .header-image-container { width: 100%; border-bottom: 6px solid var(--gob-oro); background: #fff; }
         .header-image-container img { width: 100%; max-width: 1000px; margin: 0 auto; display: block; height: auto; }
 
         /* --- CONTENIDO --- */
         main { flex: 1; max-width: 900px; margin: 20px auto; padding: 0 15px; text-align: center; width: 100%; }
-
         .titulos-sep { margin-bottom: 25px; font-family: 'Montserrat', sans-serif; }
-        .titulos-sep h2 { font-weight: 700; font-size: 1.4rem; color: #444; }
-        .titulos-sep h3 { font-weight: 400; font-size: 1rem; color: #666; margin-top: 5px; }
-        .titulos-sep .linea-decorativa { width: 50px; height: 3px; background: var(--gob-oro); margin: 15px auto; }
+        .linea-decorativa { width: 50px; height: 3px; background: var(--gob-oro); margin: 15px auto; }
 
         .search-container {
             background: #ffffff; border-top: 4px solid var(--sep-rojo-obscuro);
@@ -75,86 +84,64 @@
 
         input[type="text"] {
             width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px;
-            font-size: 16px; margin-bottom: 20px; font-family: 'Montserrat', sans-serif;
-            text-align: center;
+            font-size: 16px; margin-bottom: 20px; font-family: 'Montserrat', sans-serif; text-align: center;
         }
 
         .button-group { display: flex; gap: 10px; justify-content: center; flex-direction: column; }
-        .btn-buscar, .btn-restablecer { 
-            width: 100%; padding: 14px; border: none; border-radius: 4px;
-            font-family: 'Montserrat', sans-serif; font-weight: 700; cursor: pointer; font-size: 14px;
-        }
-        .btn-buscar { background-color: var(--sep-rojo-obscuro); color: white; }
-        .btn-restablecer { background-color: var(--gob-gris-boton); color: white; }
+        .btn-buscar { background-color: var(--sep-rojo-obscuro); color: white; padding: 14px; border: none; border-radius: 4px; font-weight: 700; cursor: pointer; }
+        .btn-restablecer { background-color: var(--gob-gris-boton); color: white; padding: 14px; border: none; border-radius: 4px; font-weight: 700; cursor: pointer; }
 
         #mensajeError {
-            display: none; margin-top: 20px; padding: 15px;
-            background-color: #fdecea; border: 1px solid var(--error-rojo);
-            color: var(--error-rojo); border-radius: 4px; font-family: 'Montserrat', sans-serif;
-            font-size: 14px; text-align: left;
+            display: none; margin-top: 20px; padding: 15px; background: #fdecea; 
+            border: 1px solid var(--error-rojo); color: var(--error-rojo); border-radius: 4px; text-align: left;
         }
 
         #resultado { 
             display: none; margin-top: 30px; text-align: left; background: white; 
-            padding: 20px; border-radius: 4px; border: 1px solid #ddd;
-            border-left: 5px solid var(--sep-rojo-obscuro); box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            margin-bottom: 40px;
+            padding: 20px; border-radius: 4px; border-left: 5px solid var(--sep-rojo-obscuro);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 40px;
         }
 
         .grid-resultados { display: grid; grid-template-columns: 1fr; gap: 15px; }
-        .info-item { font-family: 'Montserrat', sans-serif; border-bottom: 1px solid #f0f0f0; padding-bottom: 5px; }
-        .info-label { font-weight: 700; color: #333; font-size: 11px; text-transform: uppercase; }
-        .info-value { font-weight: 400; color: #555; font-size: 14px; margin-top: 2px; }
-        
-        /* --- BADGE VERDE PARA ESTATUS --- */
-        .badge-registro { 
-            background-color: var(--estatus-verde); 
-            color: white; padding: 4px 10px; border-radius: 4px; 
-            font-weight: 700; font-size: 12px; display: inline-block;
-        }
+        .info-item { border-bottom: 1px solid #f0f0f0; padding-bottom: 5px; }
+        .info-label { font-weight: 700; color: #333; font-size: 11px; text-transform: uppercase; font-family: 'Montserrat'; }
+        .badge-registro { background-color: var(--estatus-verde); color: white; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 12px; }
 
         /* --- FOOTER --- */
         footer { background-color: var(--sep-rojo-obscuro); color: white; padding: 40px 5% 20px; font-family: 'Montserrat', sans-serif; margin-top: auto; }
-        .footer-container { display: flex; flex-direction: column; gap: 30px; max-width: 1000px; margin: 0 auto; }
-        .footer-col h4 { font-size: 15px; margin-bottom: 15px; border-bottom: 1px solid var(--gob-oro); display: inline-block; }
-        .footer-col a { color: white; text-decoration: none; display: block; font-size: 12px; margin-bottom: 8px; opacity: 0.8; }
         .footer-bottom { text-align: center; margin-top: 30px; font-size: 10px; opacity: 0.6; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); }
 
         @media (min-width: 600px) {
-            nav.gob-header { padding: 10px 30px; }
             .button-group { flex-direction: row; }
-            .btn-buscar, .btn-restablecer { width: auto; min-width: 160px; }
+            .btn-buscar, .btn-restablecer { min-width: 160px; }
             .grid-resultados { grid-template-columns: 1fr 1fr; }
-            .footer-container { flex-direction: row; justify-content: space-between; }
         }
     </style>
 </head>
-<body>
+<body id="mainBody">
 
-<div class="acc-trigger" onclick="document.getElementById('accPanel').classList.toggle('active')">
-    <i class="fas fa-universal-access fa-2x" style="color: #FFFFFF;"></i>
+<div class="acc-trigger" onclick="toggleAccPanel()">
+    <i class="fas fa-universal-access fa-2x"></i>
 </div>
 
 <div id="accPanel" class="acc-panel-sidebar">
-    <div class="acc-reset-btn" onclick="location.reload();">Restablecer</div>
-    <div class="acc-item" onclick="document.body.classList.toggle('grayscale-mode')">Escala de grises</div>
+    <div class="acc-reset-btn" onclick="resetAcc()">Restablecer</div>
+    <div class="acc-item" onclick="toggleGrayscale()"><i class="fas fa-adjust"></i> Escala de grises</div>
+    <div class="acc-item" onclick="toggleContrast()"><i class="fas fa-palette"></i> Alto contraste</div>
+    <div class="acc-item" onclick="toggleTextSize()"><i class="fas fa-text-height"></i> Aumentar texto</div>
+    <div class="acc-item" onclick="toggleAccPanel()"><i class="fas fa-times"></i> Cerrar menú</div>
 </div>
 
 <nav class="gob-header">
-    <a href="https://www.gob.mx" target="_blank">
-        <img class="logo-gob" src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" alt="Gobierno de México">
-    </a>
+    <a href="https://www.gob.mx"><img class="logo-gob" src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" alt="Gobierno de México"></a>
     <ul class="nav-links-gob">
-        <li><a href="https://www.gob.mx/tramites" target="_blank">Trámites</a></li>
-        <li><a href="https://www.gob.mx/gobierno" target="_blank">Gobierno</a></li>
-        <li><a href="https://www.gob.mx/busqueda" target="_blank"><i class="fas fa-search"></i></a></li>
+        <li><a href="https://www.gob.mx/tramites">Trámites</a></li>
+        <li><a href="https://www.gob.mx/gobierno">Gobierno</a></li>
     </ul>
 </nav>
 
 <div class="header-image-container">
-    <a href="index.html">
-        <img src="logo.png" alt="SEP">
-    </a>
+    <img src="logo.png" alt="SEP">
 </div>
 
 <main>
@@ -166,56 +153,40 @@
 
     <div class="search-container">
         <p style="text-align: left; font-size: 14px; margin-bottom: 15px; font-family: 'Montserrat';">Ingrese el folio de control:</p>
-        <input type="text" id="folioInput" placeholder="" maxlength="30">
-        
+        <input type="text" id="folioInput" placeholder="EJ: 123456789" maxlength="30">
         <div class="button-group">
             <button class="btn-buscar" onclick="buscar()">CONSULTAR</button>
             <button class="btn-restablecer" onclick="restablecer()">LIMPIAR</button>
         </div>
-
         <div id="mensajeError">
-            <i class="fas fa-exclamation-triangle"></i> 
-            <strong>Error:</strong> Folio no válido o no encontrado. Verifique la información.
+            <i class="fas fa-exclamation-triangle"></i> Folio no encontrado.
         </div>
     </div>
 
     <div id="resultado">
-        <h4 style="font-family: 'Montserrat'; color: var(--sep-rojo-obscuro); margin-bottom: 15px;">Localización de Documento</h4>
+        <h4 style="font-family: 'Montserrat'; color: var(--sep-rojo-obscuro); margin-bottom: 15px;">Validación Exitosa</h4>
         <div id="infoDetalle" class="grid-resultados"></div>
     </div>
 </main>
 
 <footer>
-    <div class="footer-container">
-        <div class="footer-col">
-            <a href="https://www.gob.mx" target="_blank">
-                <img src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" width="120" style="filter: brightness(0) invert(1);">
-            </a>
-        </div>
-        <div class="footer-col">
-            <h4>Enlaces</h4>
-            <a href="https://participa.gob.mx" target="_blank">Participa</a>
-            <a href="https://www.gob.mx/publicaciones" target="_blank">Publicaciones Oficiales</a>
-        </div>
-        <div class="footer-col">
-            <h4>Legal</h4>
-            <a href="https://www.gob.mx/aviso_de_privacidad" target="_blank">Privacidad</a>
-            <a href="https://www.gob.mx/terminos" target="_blank">Términos</a>
-        </div>
-        <div class="footer-col">
-            <h4>Contacto</h4>
-            <a href="mailto:controlescolar.estatal@sems.sidgbe.gob.mx">Soporte Técnico</a>
-        </div>
-    </div>
     <div class="footer-bottom">SEP | SEMS | México 2026</div>
 </footer>
 
 <script src="folios.js"></script>
-
 <script>
+    // FUNCIONES DE ACCESIBILIDAD
+    function toggleAccPanel() { document.getElementById('accPanel').classList.toggle('active'); }
+    function toggleGrayscale() { document.body.classList.toggle('grayscale-mode'); }
+    function toggleContrast() { document.body.classList.toggle('high-contrast'); }
+    function toggleTextSize() { document.body.classList.toggle('increase-text'); }
+    function resetAcc() { 
+        document.body.classList.remove('grayscale-mode', 'high-contrast', 'increase-text'); 
+    }
+
+    // LÓGICA DE BÚSQUEDA
     function buscar() {
-        const input = document.getElementById('folioInput');
-        const folio = input.value.trim().toUpperCase();
+        const f = document.getElementById('folioInput').value.trim().toUpperCase();
         const resDiv = document.getElementById('resultado');
         const errDiv = document.getElementById('mensajeError');
         const detalle = document.getElementById('infoDetalle');
@@ -223,20 +194,17 @@
         resDiv.style.display = 'none';
         errDiv.style.display = 'none';
 
-        if (!folio) { alert("Por favor, ingrese un folio."); return; }
-
-        if (typeof baseDatos !== 'undefined' && baseDatos[folio]) {
-            const d = baseDatos[folio];
+        if (typeof baseDatos !== 'undefined' && baseDatos[f]) {
+            const d = baseDatos[f];
             detalle.innerHTML = `
-                <div class="info-item"><span class="info-label">Nombre del Alumno:</span> <span class="info-value">${d.nombre}</span></div>
-                <div class="info-item"><span class="info-label">Matrícula:</span> <span class="info-value">${d.matricula}</span></div>
-                <div class="info-item"><span class="info-label">Plan Académico:</span> <span class="info-value">${d.plan}</span></div>
-                <div class="info-item"><span class="info-label">Folio de Control:</span> <span class="info-value">${folio}</span></div>
-                <div class="info-item"><span class="info-label">Estatus:</span> <span class="info-value"><span class="badge-registro">${d.estatus}</span></span></div>
-                <div class="info-item" style="grid-column: 1 / -1;"><span class="info-label">Institución:</span> <span class="info-value">${d.plantel}</span></div>
+                <div class="info-item"><span class="info-label">Nombre:</span><br>${d.nombre}</div>
+                <div class="info-item"><span class="info-label">Matrícula:</span><br>${d.matricula}</div>
+                <div class="info-item"><span class="info-label">Folio:</span><br>${f}</div>
+                <div class="info-item"><span class="info-label">Estatus:</span><br><span class="badge-registro">${d.estatus}</span></div>
+                <div class="info-item" style="grid-column: 1/-1;"><span class="info-label">Institución:</span><br>${d.plantel}</div>
             `;
             resDiv.style.display = 'block';
-            resDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            resDiv.scrollIntoView({ behavior: 'smooth' });
         } else {
             errDiv.style.display = 'block';
         }
@@ -246,10 +214,7 @@
         document.getElementById('folioInput').value = "";
         document.getElementById('resultado').style.display = 'none';
         document.getElementById('mensajeError').style.display = 'none';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 </script>
-
 </body>
 </html>
-      
