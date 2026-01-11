@@ -17,10 +17,10 @@
             --estatus-verde: #235E3F;
         }
 
-        /* --- ESTADOS DE ACCESIBILIDAD --- */
+        /* --- ACCESIBILIDAD --- */
         .grayscale-mode { filter: grayscale(100%); }
         .high-contrast { background: #000 !important; color: #fff !important; }
-        .high-contrast .search-container, .high-contrast #resultado, .high-contrast main { background: #111 !important; color: #fff !important; }
+        .high-contrast .search-container, .high-contrast #resultado { background: #111 !important; color: #fff !important; }
         .increase-text { font-size: 1.2rem; }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,7 +34,7 @@
             flex-direction: column;
         }
 
-        /* --- PANEL DE ACCESIBILIDAD --- */
+        /* --- PANEL ACCESIBILIDAD --- */
         .acc-panel-sidebar {
             position: fixed; left: -320px; top: 0; width: 280px; height: 100vh;
             background: #fff; z-index: 9999; transition: 0.3s;
@@ -47,16 +47,9 @@
             background: var(--sep-rojo-obscuro); color: #FFFFFF;
             padding: 12px 10px; border-radius: 0 5px 5px 0; cursor: pointer; z-index: 10000;
         }
-        .acc-item { 
-            display: flex; align-items: center; padding: 12px; 
-            margin-bottom: 8px; border-radius: 5px; cursor: pointer; 
-            background: #f8f8f8; color: #333; font-size: 13px; font-weight: 600;
-        }
+        .acc-item { display: flex; align-items: center; padding: 12px; margin-bottom: 8px; border-radius: 5px; cursor: pointer; background: #f8f8f8; color: #333; font-size: 13px; font-weight: 600; }
         .acc-item i { margin-right: 10px; color: var(--sep-rojo-obscuro); width: 20px; text-align: center; }
-        .acc-reset-btn {
-            background: var(--sep-rojo-obscuro); color: white; text-align: center;
-            padding: 12px; border-radius: 5px; margin-bottom: 20px; cursor: pointer; font-weight: bold;
-        }
+        .acc-reset-btn { background: var(--sep-rojo-obscuro); color: white; text-align: center; padding: 12px; border-radius: 5px; margin-bottom: 20px; cursor: pointer; font-weight: bold; }
 
         /* --- CABECERA --- */
         nav.gob-header {
@@ -94,18 +87,20 @@
             border: 1px solid var(--error-rojo); color: var(--error-rojo); border-radius: 4px; text-align: left;
         }
 
+        /* --- RESULTADOS (TABLA COMPLETA) --- */
         #resultado { 
             display: none; margin-top: 30px; text-align: left; background: white; 
-            padding: 20px; border-radius: 4px; border-left: 5px solid var(--sep-rojo-obscuro);
+            padding: 25px; border-radius: 4px; border-left: 5px solid var(--sep-rojo-obscuro);
             box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 40px;
         }
 
-        .grid-resultados { display: grid; grid-template-columns: 1fr; gap: 15px; }
-        .info-item { border-bottom: 1px solid #f0f0f0; padding-bottom: 5px; }
-        .info-label { font-weight: 700; color: #333; font-size: 11px; text-transform: uppercase; font-family: 'Montserrat'; }
+        .grid-resultados { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        .info-item { border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; font-family: 'Montserrat', sans-serif; }
+        .info-label { font-weight: 700; color: #333; font-size: 11px; text-transform: uppercase; display: block; margin-bottom: 3px; }
+        .info-value { font-weight: 400; color: #555; font-size: 15px; }
         .badge-registro { background-color: var(--estatus-verde); color: white; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 12px; }
 
-        /* --- FOOTER (RESTAURADO) --- */
+        /* --- FOOTER --- */
         footer { background-color: var(--sep-rojo-obscuro); color: white; padding: 40px 15px 20px; font-family: 'Montserrat', sans-serif; margin-top: auto; }
         .footer-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; text-align: left; }
         .footer-col h4 { font-size: 15px; margin-bottom: 15px; border-bottom: 1px solid var(--gob-oro); display: inline-block; }
@@ -113,7 +108,6 @@
         .footer-bottom { text-align: center; margin-top: 30px; font-size: 10px; opacity: 0.6; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); }
 
         @media (min-width: 600px) {
-            nav.gob-header { padding: 10px 30px; }
             .button-group { flex-direction: row; }
             .btn-buscar, .btn-restablecer { min-width: 160px; }
             .grid-resultados { grid-template-columns: 1fr 1fr; }
@@ -168,7 +162,7 @@
     </div>
 
     <div id="resultado">
-        <h4 style="font-family: 'Montserrat'; color: var(--sep-rojo-obscuro); margin-bottom: 15px;">Información del Documento</h4>
+        <h4 style="font-family: 'Montserrat'; color: var(--sep-rojo-obscuro); margin-bottom: 20px;">Resultado de la Validación</h4>
         <div id="infoDetalle" class="grid-resultados"></div>
     </div>
 </main>
@@ -192,7 +186,7 @@
         </div>
         <div class="footer-col">
             <h4>Contacto</h4>
-            <a href="mailto:soporte@sems.gob.mx">Soporte Técnico</a>
+            <a href="mailto:controlescolar.estatal@sems.sidgbe.gob.mx">Soporte Técnico</a>
         </div>
     </div>
     <div class="footer-bottom">SEP | SEMS | México 2026</div>
@@ -217,13 +211,39 @@
 
         if (typeof baseDatos !== 'undefined' && baseDatos[f]) {
             const d = baseDatos[f];
+            
+            // CONSTRUCCIÓN COMPLETA DE DATOS SEGÚN TU HTML ORIGINAL
             detalle.innerHTML = `
-                <div class="info-item"><span class="info-label">Nombre:</span><br>${d.nombre}</div>
-                <div class="info-item"><span class="info-label">Matrícula:</span><br>${d.matricula}</div>
-                <div class="info-item"><span class="info-label">Folio:</span><br>${f}</div>
-                <div class="info-item"><span class="info-label">Estatus:</span><br><span class="badge-registro">${d.estatus}</span></div>
-                <div class="info-item" style="grid-column: 1/-1;"><span class="info-label">Institución:</span><br>${d.plantel}</div>
+                <div class="info-item">
+                    <span class="info-label">Nombre del Alumno:</span>
+                    <span class="info-value">${d.nombre}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Matrícula:</span>
+                    <span class="info-value">${d.matricula}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Plan Académico:</span>
+                    <span class="info-value">${d.plan}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Folio de Control:</span>
+                    <span class="info-value">${f}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Promedio Final:</span>
+                    <span class="info-value">${d.promedio || 'N/A'}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Estatus:</span>
+                    <span class="info-value"><span class="badge-registro">${d.estatus}</span></span>
+                </div>
+                <div class="info-item" style="grid-column: 1 / -1;">
+                    <span class="info-label">Institución:</span>
+                    <span class="info-value">${d.plantel}</span>
+                </div>
             `;
+            
             resDiv.style.display = 'block';
             resDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } else {
@@ -240,4 +260,3 @@
 </script>
 </body>
 </html>
-      
