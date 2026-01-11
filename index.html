@@ -10,11 +10,9 @@
     
     <style>
         :root {
+            --sep-rojo-obscuro: #4B1021; /* ROJO SEP INSTITUCIONAL */
             --gob-guinda: #621132; 
-            --gob-guinda-claro: #9D2449;
             --gob-oro: #9D843E;   
-            --sep-rojo: #A42145; /* Rojo Institucional SEP */
-            --sep-rojo-oscuro: #4B1021; /* Rojo para el Footer */
             --gob-gris-boton: #757575;   
         }
 
@@ -30,7 +28,7 @@
             min-height: 100vh;
         }
 
-        /* --- ACCESIBILIDAD --- */
+        /* --- ACCESIBILIDAD (SEP ROJO OBSCURO) --- */
         .acc-panel-sidebar {
             position: fixed; left: -320px; top: 0; width: 300px; height: 100vh;
             background: #EAEAEA; z-index: 9999; transition: 0.3s;
@@ -40,24 +38,24 @@
         .acc-panel-sidebar.active { left: 0; }
         .acc-trigger {
             position: fixed; left: 0; top: 50%; transform: translateY(-50%);
-            background: var(--sep-rojo); color: white; padding: 15px 10px;
+            background: var(--sep-rojo-obscuro); color: white; padding: 15px 10px;
             border-radius: 0 5px 5px 0; cursor: pointer; z-index: 10000;
         }
+        .acc-reset-btn {
+            background: var(--sep-rojo-obscuro); color: white; display: flex; align-items: center;
+            padding: 12px; border-radius: 8px; margin-bottom: 25px; cursor: pointer; font-weight: bold;
+        }
+        .acc-item { display: flex; align-items: center; margin-bottom: 12px; cursor: pointer; color: #7a2b3f; font-size: 13px; font-weight: 600; }
         .acc-icon-box {
-            width: 45px; height: 45px; background: #C28497; border-radius: 8px;
+            width: 45px; height: 45px; background: #8c4b5a; border-radius: 8px;
             display: flex; align-items: center; justify-content: center;
             margin-right: 15px; color: white; font-size: 20px; flex-shrink: 0;
         }
-        .acc-item { display: flex; align-items: center; margin-bottom: 12px; cursor: pointer; color: #B37185; font-size: 13px; font-weight: 600; }
-        .acc-reset-btn {
-            background: var(--sep-rojo); color: white; display: flex; align-items: center;
-            padding: 12px; border-radius: 8px; margin-bottom: 25px; cursor: pointer; font-weight: bold;
-        }
         .grayscale-mode { filter: grayscale(100%); }
 
-        /* Navegación Superior (Antes verde, ahora Rojo SEP) */
+        /* --- NAVEGACIÓN SUPERIOR (SEP ROJO OBSCURO) --- */
         nav.gob-header {
-            background-color: var(--sep-rojo); 
+            background-color: var(--sep-rojo-obscuro);
             padding: 10px 50px;
             display: flex;
             justify-content: space-between;
@@ -83,7 +81,7 @@
 
         .search-container {
             background: #ffffff;
-            border-top: 4px solid var(--sep-rojo);
+            border-top: 4px solid var(--sep-rojo-obscuro);
             border-radius: 4px; padding: 40px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
@@ -92,14 +90,14 @@
             font-size: 18px; margin-bottom: 25px; font-family: 'Montserrat', sans-serif; text-transform: uppercase;
         }
 
-        /* Botón de búsqueda (Antes verde, ahora Rojo SEP) */
+        /* --- BOTÓN DE BÚSQUEDA (SEP ROJO OBSCURO) --- */
         .btn-buscar { 
-            background-color: var(--sep-rojo); 
+            background-color: var(--sep-rojo-obscuro); 
             color: white; padding: 12px 40px; border: none; border-radius: 4px;
             font-family: 'Montserrat', sans-serif; font-weight: 700; cursor: pointer;
             transition: 0.3s;
         }
-        .btn-buscar:hover { background-color: var(--gob-guinda); transform: translateY(-2px); }
+        .btn-buscar:hover { background-color: #350a17; transform: translateY(-2px); }
 
         .btn-restablecer { 
             background-color: var(--gob-gris-boton); 
@@ -107,11 +105,11 @@
             font-family: 'Montserrat', sans-serif; cursor: pointer;
         }
 
-        /* Resultados y Bordes (Antes verdes, ahora Rojos) */
+        /* --- RESULTADOS (BORDE SEP ROJO OBSCURO) --- */
         #resultado { 
             display: none; margin-top: 40px; text-align: left; background: white; 
             padding: 30px; border-radius: 8px; border: 1px solid #ddd;
-            border-left: 5px solid var(--sep-rojo);
+            border-left: 5px solid var(--sep-rojo-obscuro);
             box-shadow: 0 4px 15px rgba(0,0,0,0.1); animation: fadeIn 0.5s;
             margin-bottom: 50px;
         }
@@ -125,13 +123,13 @@
         .info-value { font-weight: 400; color: #555; font-size: 15px; display: block; margin-top: 3px; }
 
         .badge-registro {
-            background-color: var(--sep-rojo);
+            background-color: var(--sep-rojo-obscuro);
             color: white; padding: 3px 10px; border-radius: 4px; font-weight: 700; font-size: 12px;
         }
 
-        /* Footer (Antes verde, ahora Rojo Oscuro Institucional) */
+        /* --- FOOTER (SEP ROJO OBSCURO COMPLETAMENTE) --- */
         footer { 
-            background-color: var(--sep-rojo-oscuro); 
+            background-color: var(--sep-rojo-obscuro); 
             color: white; padding: 50px 0 20px 0; font-family: 'Montserrat', sans-serif; 
         }
         .footer-container { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; padding: 0 20px; }
@@ -195,7 +193,7 @@
 
     <div id="resultado">
         <div style="margin-bottom: 20px;">
-            <h4 style="font-family: 'Montserrat'; color: var(--sep-rojo);">Resultado de la Validación</h4>
+            <h4 style="font-family: 'Montserrat'; color: var(--sep-rojo-obscuro);">Resultado de la Validación</h4>
             <p style="font-size: 13px; color: #666;">El documento ha sido localizado y autenticado exitosamente.</p>
         </div>
         <div id="infoDetalle" class="grid-resultados"></div>
@@ -259,3 +257,4 @@
 
 </body>
 </html>
+    
