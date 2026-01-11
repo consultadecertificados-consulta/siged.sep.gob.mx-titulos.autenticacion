@@ -14,10 +14,15 @@
             --gob-oro: #9D843E;   
             --gob-gris-boton: #757575;
             --estatus-verde: #235E3F;
-            --bg-card-promedio: #f0f9f0;
-            --border-card-promedio: #c2e0c2;
-            --bg-card-estatus: #f0f7ff;
-            --border-card-estatus: #c2d9f7;
+            
+            /* COLORES EXACTOS DE LA IMAGEN */
+            --bg-promedio: #E3F2E1;
+            --border-promedio: #B7D9B1;
+            --texto-promedio: #3D7A34;
+            
+            --bg-estatus: #D9F0F7;
+            --border-estatus: #ADE1F0;
+            --texto-estatus: #316B8C;
         }
 
         /* ACCESIBILIDAD */
@@ -29,33 +34,13 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Lora', serif;
+            font-family: 'Montserrat', sans-serif;
             background-color: #f4f4f4;
             background-image: url("https://www.gob.mx/cms/uploads/image/file/485750/background.png");
             background-repeat: repeat;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            transition: 0.3s;
-        }
-
-        /* PANEL ACCESIBILIDAD */
-        .acc-panel-sidebar {
-            position: fixed; left: -320px; top: 0; width: 280px; height: 100vh;
-            background: #fff; z-index: 99999; transition: 0.4s;
-            padding: 25px; font-family: 'Montserrat', sans-serif;
-            box-shadow: 5px 0 20px rgba(0,0,0,0.4);
-        }
-        .acc-panel-sidebar.active { left: 0; }
-        .acc-trigger {
-            position: fixed; left: 0; top: 50%; transform: translateY(-50%);
-            background: var(--sep-rojo-obscuro); color: #FFFFFF;
-            padding: 15px 12px; border-radius: 0 8px 8px 0; cursor: pointer; z-index: 100000;
-        }
-        .acc-item { 
-            display: block; width: 100%; padding: 12px; margin-bottom: 10px; 
-            background: #f0f0f0; border-radius: 6px; cursor: pointer; 
-            text-align: center; font-weight: 600; color: #333; border: none;
         }
 
         /* HEADER */
@@ -65,14 +50,14 @@
         }
         .logo-gob { height: 35px; }
         .nav-links-gob { display: flex; gap: 20px; list-style: none; }
-        .nav-links-gob a { color: white; text-decoration: none; font-size: 14px; font-family: 'Montserrat'; }
+        .nav-links-gob a { color: white; text-decoration: none; font-size: 14px; }
 
         .header-image-container { width: 100%; border-bottom: 6px solid var(--gob-oro); background: #fff; padding: 10px 0; }
         .header-image-container img { width: 100%; max-width: 900px; margin: 0 auto; display: block; height: auto; }
 
         /* CONTENIDO */
         main { flex: 1; max-width: 900px; margin: 30px auto; padding: 0 15px; width: 100%; }
-        .titulos-sep { text-align: center; margin-bottom: 30px; font-family: 'Montserrat'; }
+        .titulos-sep { text-align: center; margin-bottom: 30px; }
         .titulos-sep h2 { color: #000; font-weight: 700; font-size: 1.8rem; margin-bottom: 5px; }
         .titulos-sep h3 { color: #333; font-weight: 400; font-size: 1.2rem; }
         .linea-decorativa { width: 60px; height: 4px; background: var(--gob-oro); margin: 15px auto; }
@@ -80,118 +65,96 @@
         /* BUSCADOR */
         .search-container {
             background: #ffffff; border-top: 5px solid var(--sep-rojo-obscuro);
-            border-radius: 8px; padding: 40px 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            text-align: center;
+            border-radius: 4px; padding: 40px 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center; margin-bottom: 20px;
         }
         input[type="text"] {
             width: 100%; max-width: 500px; padding: 15px; border: 2px solid #ddd; 
-            border-radius: 6px; font-size: 18px; margin-bottom: 25px; text-align: center;
+            border-radius: 4px; font-size: 18px; margin-bottom: 25px; text-align: center;
         }
 
         .button-group { display: flex; gap: 15px; justify-content: center; }
-        .btn-buscar { background: var(--sep-rojo-obscuro); color: white; padding: 15px 40px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; }
-        .btn-restablecer { background: var(--gob-gris-boton); color: white; padding: 15px 40px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; }
+        .btn-buscar { background: var(--sep-rojo-obscuro); color: white; padding: 15px 40px; border: none; border-radius: 4px; font-weight: 700; cursor: pointer; }
+        .btn-restablecer { background: var(--gob-gris-boton); color: white; padding: 15px 40px; border: none; border-radius: 4px; font-weight: 700; cursor: pointer; }
 
         /* RESULTADOS */
         #resultado { 
-            display: none; margin-top: 40px; background: white; padding: 35px; 
-            border-radius: 8px; border-left: 8px solid var(--estatus-verde);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        .validacion-leyenda { border-bottom: 1px solid #eee; margin-bottom: 20px; padding-bottom: 15px; }
-        .validacion-leyenda h4 { color: var(--estatus-verde); font-family: 'Montserrat'; margin-bottom: 5px; font-size: 1.2rem; }
-        .validacion-leyenda p { color: #666; font-size: 0.95rem; }
-
-        .info-item { border-bottom: 1px solid #eee; padding: 12px 0; display: flex; justify-content: space-between; align-items: center;}
-        .info-label { font-weight: 700; color: #333; font-size: 12px; text-transform: uppercase; font-family: 'Montserrat'; }
-        .info-value { font-weight: 400; color: #555; font-size: 15px; text-align: right; }
-
-        /* ESTILOS DE TARJETAS BASADOS EN LA IMAGEN */
-        .cards-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            align-items: center;
-            margin: 25px 0 35px 0;
+            display: none; background: white; padding: 35px; 
+            border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        .card-custom {
+        /* --- DISEÑO DE TARJETAS RÉPLICA DE IMAGEN --- */
+        .card-container {
+            margin-bottom: 25px;
             width: 100%;
-            max-width: 480px;
-            padding: 30px 20px;
-            border-radius: 10px;
+        }
+
+        .card-box {
+            width: 100%;
+            padding: 25px 15px;
             text-align: center;
-            font-family: 'Montserrat', sans-serif;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-radius: 4px; /* Un poco redondeado como la imagen */
+            border: 2px solid;
+            margin-bottom: 20px;
         }
 
+        /* Tarjeta Promedio */
         .card-promedio {
-            background-color: var(--bg-card-promedio);
-            border: 2.5px solid var(--border-card-promedio);
+            background-color: var(--bg-promedio);
+            border-color: var(--border-promedio);
         }
-
-        .card-estatus {
-            background-color: var(--bg-card-estatus);
-            border: 2.5px solid var(--border-card-estatus);
-        }
-
-        .card-title {
-            font-size: 1.5rem;
+        .card-promedio .titulo {
+            color: var(--texto-promedio);
+            font-size: 24px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+        }
+        .card-promedio .valor-num {
+            color: var(--texto-promedio);
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+        .card-promedio .valor-texto {
+            color: var(--texto-promedio);
+            font-size: 24px;
+            font-weight: 700;
         }
 
-        .card-promedio .card-title { color: #235E3F; }
-        .card-estatus .card-title { color: #1a4b8c; }
-
-        .card-value-number {
-            font-size: 4rem;
-            font-weight: 800;
-            line-height: 1;
-            margin: 10px 0;
-            color: #333;
+        /* Tarjeta Estatus */
+        .card-estatus {
+            background-color: var(--bg-estatus);
+            border-color: var(--border-estatus);
+            padding: 35px 15px;
+        }
+        .card-estatus .titulo {
+            color: var(--texto-estatus);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .card-estatus .valor-estatus {
+            color: var(--texto-estatus);
+            font-size: 28px;
+            font-weight: 400;
         }
 
-        .card-value-text {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #444;
-            margin-top: 5px;
-        }
+        /* LISTA DE DATOS INFERIOR */
+        .info-item { border-bottom: 1px solid #eee; padding: 15px 0; }
+        .info-label { font-weight: 700; color: #333; font-size: 16px; display: block; margin-bottom: 5px; }
+        .info-value { font-weight: 400; color: #555; font-size: 16px; display: block; }
 
-        .card-estatus-text {
-            font-size: 2.2rem;
-            font-weight: 600;
-            color: #2c5282;
-            margin-top: 15px;
-            display: block;
-        }
-
-        /* FOOTER */
-        footer { background: var(--sep-rojo-obscuro); color: white; padding: 50px 30px 20px; font-family: 'Montserrat'; margin-top: 50px; }
+        footer { background: var(--sep-rojo-obscuro); color: white; padding: 50px 30px 20px; margin-top: 50px; }
         .footer-container { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
-        .footer-col h4 { margin-bottom: 20px; border-bottom: 2px solid var(--gob-oro); display: inline-block; padding-bottom: 5px; }
         .footer-col a { color: white; text-decoration: none; display: block; margin-bottom: 10px; font-size: 13px; opacity: 0.8; }
         .footer-bottom { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 11px; }
 
         @media (max-width: 600px) {
             .button-group { flex-direction: column; }
-            .info-item { flex-direction: column; text-align: left; }
-            .info-value { text-align: left; margin-top: 5px; }
-            .card-value-number { font-size: 3rem; }
         }
     </style>
 </head>
 <body>
-
-<div class="acc-trigger" onclick="toggleAccPanel()"><i class="fas fa-universal-access fa-2x"></i></div>
-<div id="accPanel" class="acc-panel-sidebar">
-    <button class="acc-item" style="background:var(--sep-rojo-obscuro); color:white;" onclick="resetAcc()">Restablecer</button>
-    <button class="acc-item" onclick="toggleGrayscale()">Escala de grises</button>
-    <button class="acc-item" onclick="toggleContrast()">Alto contraste</button>
-    <button class="acc-item" onclick="toggleTextSize()">Aumentar texto</button>
-    <button class="acc-item" onclick="toggleAccPanel()">Cerrar Menú</button>
-</div>
 
 <nav class="gob-header">
     <a href="https://www.gob.mx" target="_blank"><img class="logo-gob" src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg"></a>
@@ -221,54 +184,20 @@
     </div>
 
     <div id="resultado">
-        <div class="validacion-leyenda">
-            <h4>Resultado de la Validación</h4>
-            <p>El documento ha sido localizado y autenticado exitosamente.</p>
-        </div>
         <div id="infoDetalle"></div>
     </div>
 </main>
 
 <footer>
     <div class="footer-container">
-        <div class="footer-col">
-            <img src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" width="150" style="filter: brightness(0) invert(1); margin-bottom: 20px;">
-        </div>
-        <div class="footer-col">
-            <h4>Enlaces</h4>
-            <a href="https://participa.gob.mx" target="_blank">Participa</a>
-            <a href="https://www.gob.mx/publicaciones" target="_blank">Publicaciones</a>
-        </div>
-        <div class="footer-col">
-            <h4>Legal</h4>
-            <a href="https://www.gob.mx/privacidad" target="_blank">Privacidad</a>
-            <a href="https://www.gob.mx/terminos" target="_blank">Términos</a>
-        </div>
-        <div class="footer-col">
-            <h4>Contacto</h4>
-            <a href="mailto:controlescolar.estatal@sems.sidgbe.gob.mx">Soporte Técnico</a>
-        </div>
+        <div class="footer-col"><img src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" width="150" style="filter: brightness(0) invert(1);"></div>
+        <div class="footer-col"><a href="#">Privacidad</a><a href="#">Términos</a></div>
     </div>
-    <div class="footer-bottom">SEP | SEMS | Registro Federal de Educación Media Superior | México 2026</div>
+    <div class="footer-bottom">SEP | SEMS | 2026</div>
 </footer>
 
 <script src="folios.js"></script>
 <script>
-    window.onload = function() {
-        const params = new URLSearchParams(window.location.search);
-        const folioUrl = params.get('folio');
-        if (folioUrl) {
-            document.getElementById('folioInput').value = folioUrl.trim().toUpperCase();
-            buscar();
-        }
-    }
-
-    function toggleAccPanel() { document.getElementById('accPanel').classList.toggle('active'); }
-    function toggleGrayscale() { document.body.classList.toggle('grayscale-mode'); }
-    function toggleContrast() { document.body.classList.toggle('high-contrast'); }
-    function toggleTextSize() { document.body.classList.toggle('increase-text'); }
-    function resetAcc() { document.body.classList.remove('grayscale-mode', 'high-contrast', 'increase-text'); }
-
     function buscar() {
         const f = document.getElementById('folioInput').value.trim().toUpperCase();
         const resDiv = document.getElementById('resultado');
@@ -277,37 +206,41 @@
         if (typeof baseDatos !== 'undefined' && baseDatos[f]) {
             const d = baseDatos[f];
             
-            // Extraer datos clave para las tarjetas (independiente de mayúsculas/minúsculas)
-            const promedioNum = d.PROMEDIO || d.promedio || "0.0";
-            const promedioLetra = d.PROMEDIO_TEXTO || d.promedio_texto || "";
-            const estatusDoc = d.ESTATUS || d.estatus || "REGISTRADO";
+            // 1. Extraer valores para las tarjetas (Promedio y Estatus)
+            const promedioNum = d.PROMEDIO || d.promedio || "";
+            const promedioTxt = d.PROMEDIO_TEXTO || d.promedio_texto || "";
+            const estatusDoc = d.ESTATUS || d.estatus || "Registrado";
 
-            let cardsHtml = `
-                <div class="cards-wrapper">
-                    <div class="card-custom card-promedio">
-                        <div class="card-title">Promedio:</div>
-                        <div class="card-value-number">${promedioNum}</div>
-                        <div class="card-value-text">${promedioLetra}</div>
-                    </div>
-                    <div class="card-custom card-estatus">
-                        <div class="card-title">Estatus del documento:</div>
-                        <span class="card-estatus-text">${estatusDoc}</span>
-                    </div>
+            // 2. Generar el HTML de las tarjetas igual a la imagen
+            let html = `
+                <div class="card-box card-promedio">
+                    <div class="titulo">Promedio:</div>
+                    <div class="valor-num">${promedioNum}</div>
+                    <div class="valor-texto">${promedioTxt}</div>
                 </div>
+                
+                <div class="card-box card-estatus">
+                    <div class="titulo">Estatus del documento:</div>
+                    <div class="valor-estatus">${estatusDoc}</div>
+                </div>
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
             `;
 
-            let tableHtml = "";
+            // 3. Agregar el resto de la información en formato lista
             for (let clave in d) {
-                let claveL = clave.toLowerCase();
-                // Omitimos los que ya pusimos en las tarjetas superiores
-                if (claveL === 'promedio' || claveL === 'promedio_texto' || claveL === 'estatus') continue;
+                let cL = clave.toLowerCase();
+                if (cL === 'promedio' || cL === 'promedio_texto' || cL === 'estatus') continue;
 
                 let label = clave.replace(/_/g, ' ').toUpperCase();
-                let valor = d[clave];
-                tableHtml += `<div class="info-item"><span class="info-label">${label}:</span><span class="info-value">${valor}</span></div>`;
+                html += `
+                    <div class="info-item">
+                        <span class="info-label">${label}:</span>
+                        <span class="info-value">${d[clave]}</span>
+                    </div>
+                `;
             }
 
-            detalle.innerHTML = cardsHtml + tableHtml;
+            detalle.innerHTML = html;
             resDiv.style.display = 'block';
             resDiv.scrollIntoView({ behavior: 'smooth' });
         } else if (f !== "") {
@@ -319,7 +252,6 @@
         document.getElementById('folioInput').value = "";
         document.getElementById('resultado').style.display = 'none';
         document.getElementById('infoDetalle').innerHTML = "";
-        window.history.replaceState({}, document.title, window.location.pathname);
     }
 </script>
 </body>
