@@ -83,20 +83,38 @@
         .btn-buscar { background: var(--sep-rojo-obscuro); color: white; padding: 15px 40px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; }
         .btn-restablecer { background: var(--gob-gris-boton); color: white; padding: 15px 40px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; }
 
-        /* RESULTADOS Y QR */
+        /* RESULTADOS */
         #resultado { 
-            display: none; margin-top: 40px; background: white; padding: 30px; 
-            border-radius: 8px; border-left: 8px solid var(--sep-rojo-obscuro);
+            display: none; margin-top: 40px; background: white; padding: 35px; 
+            border-radius: 8px; border-left: 8px solid var(--estatus-verde);
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
-        .contenedor-flexible { display: flex; flex-wrap: wrap; gap: 30px; align-items: flex-start; }
-        .datos-cliente { flex: 2; min-width: 300px; }
-        .contenedor-qr { flex: 1; min-width: 180px; text-align: center; padding: 10px; }
         
-        .info-item { border-bottom: 1px solid #eee; padding: 10px 0; }
-        .info-label { font-weight: 700; color: #333; font-size: 12px; text-transform: uppercase; display: block; font-family: 'Montserrat'; }
-        .info-value { font-weight: 400; color: #555; font-size: 15px; }
-        .badge-registro { background: var(--estatus-verde); color: white; padding: 5px 12px; border-radius: 4px; font-weight: 700; }
+        /* LEYENDA DE ÉXITO */
+        .validacion-exito {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .validacion-exito h4 {
+            color: var(--estatus-verde);
+            font-family: 'Montserrat';
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .validacion-exito p {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .info-item { border-bottom: 1px solid #f9f9f9; padding: 12px 0; }
+        .info-label { font-weight: 700; color: #333; font-size: 12px; text-transform: uppercase; display: block; font-family: 'Montserrat'; margin-bottom: 4px; }
+        .info-value { font-weight: 400; color: #555; font-size: 16px; }
+        .badge-registro { background: var(--estatus-verde); color: white; padding: 5px 12px; border-radius: 4px; font-weight: 700; display: inline-block; }
 
         /* FOOTER */
         footer { background: var(--sep-rojo-obscuro); color: white; padding: 50px 30px 20px; font-family: 'Montserrat'; margin-top: 50px; }
@@ -107,7 +125,6 @@
 
         @media (max-width: 600px) {
             .button-group { flex-direction: column; }
-            .contenedor-flexible { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
@@ -142,7 +159,7 @@
     </div>
 
     <div class="search-container">
-        <input type="text" id="folioInput" placeholder="INGRESE EL FOLIO DE CONTROL">
+        <input type="text" id="folioInput" placeholder="INGRESE EL FOLIO DE CONTROL" autocomplete="off">
         <div class="button-group">
             <button class="btn-buscar" onclick="buscar()">CONSULTAR</button>
             <button class="btn-restablecer" onclick="restablecer()">LIMPIAR</button>
@@ -150,12 +167,11 @@
     </div>
 
     <div id="resultado">
-        <div class="contenedor-flexible">
-            <div id="infoDetalle" class="datos-cliente"></div>
-            <div class="contenedor-qr">
-                <div id="qrcode"></div>
-            </div>
+        <div class="validacion-exito">
+            <h4><i class="fas fa-check-circle"></i> Resultado de la Validación</h4>
+            <p>El documento ha sido localizado y autenticado exitosamente.</p>
         </div>
+        <div id="infoDetalle"></div>
     </div>
 </main>
 
@@ -184,7 +200,6 @@
 
 <script src="folios.js"></script>
 <script>
-    // ESTA FUNCIÓN HACE QUE EL QR ABRA EL RESULTADO DIRECTO AL ESCANEAR
     window.onload = function() {
         const params = new URLSearchParams(window.location.search);
         const folioUrl = params.get('folio');
@@ -193,6 +208,11 @@
             buscar();
         }
     }
+
+    // Permitir buscar al presionar Enter
+    document.getElementById('folioInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') { buscar(); }
+    });
 
     function toggleAccPanel() { document.getElementById('accPanel').classList.toggle('active'); }
     function toggleGrayscale() { document.body.classList.toggle('grayscale-mode'); }
@@ -204,7 +224,11 @@
         const f = document.getElementById('folioInput').value.trim().toUpperCase();
         const resDiv = document.getElementById('resultado');
         const detalle = document.getElementById('infoDetalle');
-        const qrDiv = document.getElementById('qrcode');
+
+        if (f === "") {
+            alert("Por favor ingrese un folio.");
+            return;
+        }
 
         if (typeof baseDatos !== 'undefined' && baseDatos[f]) {
             const d = baseDatos[f];
@@ -220,15 +244,10 @@
                 }
             }
             detalle.innerHTML = content;
-
-            // Generar QR con el link directo de tu GitHub
-            const urlBase = window.location.origin + window.location.pathname;
-            const urlFinal = `${urlBase}?folio=${f}`;
-            qrDiv.innerHTML = `<img src="https://chart.googleapis.com/chart?chs=180x180&cht=qr&chl=${encodeURIComponent(urlFinal)}&choe=UTF-8" style="width:100%; height:auto;">`;
-
             resDiv.style.display = 'block';
             resDiv.scrollIntoView({ behavior: 'smooth' });
         } else {
+            resDiv.style.display = 'none';
             alert("Folio no encontrado.");
         }
     }
@@ -236,6 +255,7 @@
     function restablecer() {
         document.getElementById('folioInput').value = "";
         document.getElementById('resultado').style.display = 'none';
+        document.getElementById('infoDetalle').innerHTML = "";
         window.history.replaceState({}, document.title, window.location.pathname);
     }
 </script>
