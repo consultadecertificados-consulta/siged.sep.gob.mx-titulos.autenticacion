@@ -51,9 +51,26 @@
         }
         .acc-panel-sidebar.active { left: 0; }
         .acc-trigger {
-            position: fixed; left: 0; top: 50%; transform: translateY(-50%);
-            background: var(--sep-rojo-obscuro); color: #FFFFFF;
-            padding: 15px 12px; border-radius: 0 8px 8px 0; cursor: pointer; z-index: 100000;
+    position: fixed; 
+    left: 0; 
+    top: 50%; 
+    transform: translateY(-50%);
+    background: var(--sep-rojo-obscuro); 
+    color: #FFFFFF;
+    padding: 15px 12px; 
+    border-radius: 0 8px 8px 0; 
+    cursor: pointer; 
+    z-index: 100000;
+    
+    /* AÑADE ESTO */
+    opacity: 0.6; /* 0.6 es un buen equilibrio para que no estorbe la lectura */
+    transition: opacity 0.3s; /* Para que al pasar el mouse se aclare */
+}
+
+/* EFECTO: Se vuelve sólido cuando pasas el mouse encima */
+.acc-trigger:hover {
+    opacity: 1;
+}
         }
         .acc-item { 
             display: block; width: 100%; padding: 12px; margin-bottom: 10px; 
