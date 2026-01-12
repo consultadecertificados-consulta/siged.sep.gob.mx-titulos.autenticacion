@@ -1,7 +1,7 @@
 // folios.js - Contenedor externo de certificados SEMS
 const baseDatos = {
     // --- TUS FOLIOS ORIGINALES ---
-    "CBG3760391150": { nombre: "RAUL SANCHEZ ANGUIANO", matricula: "1501R850623", emisor: "COORDINACION ESTATAL DE BACHILLLERATO DE JALISCO", plantel: "14EEX0001C", plan: "BACHILLERATO GENERAL", promedio: "8.5", creditos: "360", estatus: "REGISTRADO", timbrado: "2025-09-25 16:20:11" },
+    "CBG3760391150": { nombre: "RAUL SANCHEZ ANGUIANO", matricula: "1501R850623", emisor: "DIRECCION GENERAL DE BACHILLLERATO DE JALISCO", plantel: "14EEX0001C", plan: "BACHILLERATO GENERAL", promedio: "8.5", creditos: "360", estatus: "REGISTRADO", timbrado: "2025-09-25 16:20:11" },
     "CBG376039115": { nombre: "THARSIS URIEL TEQUIHUATLE CASTRO", matricula: "1502M900412", emisor: "DIRECCIÓN GENERAL DE BACHILLERATO NUEVO LEON", plantel: "19EEX0001Y", plan: "BACHILLERATO GENERAL", promedio: "8.5", creditos: "360", estatus: "REGISTRADO", timbrado: "19-09-2025 16:20:11" },
     "CBG3760391155": { nombre: "AURELIANO GONZALEZ SABINO", matricula: "1503R880155", emisor: "DIRECCIÓN GENERAL DE BACHILLERATO", plantel: "CIUDAD DE MEXICO" , plan: "BACHILLERATO GENERAL EN LINEA", promedio: "8.5", creditos: "360", estatus: "REGISTRADO", timbrado: "23-05-2023 16:20:11" },
     "CBG3760391153": { nombre: "LUIS ANGEL GONZALEZ SANCHEZ", matricula: "1501R85O623", emisor: "DIRECCIÓN GENERAL DE BACHILLERATO DE MORELIA MICHOACAN", plantel: "16EEX0001A", plan: "BACHILLERATO GENERAL", promedio: "8.5", creditos: "360", estatus: "REGISTRADO", timbrado: "2025-09-11 14:09:35" },
