@@ -54,36 +54,20 @@
 
         /* MENÚ HAMBURGUESA ROJO SEP */
         .menu-container { position: relative; }
-        .menu-icon {
-            color: white; font-size: 24px; cursor: pointer; padding: 5px;
-            transition: 0.3s;
-        }
+        .menu-icon { color: white; font-size: 24px; cursor: pointer; padding: 5px; }
         .nav-menu {
-            display: none; 
-            position: absolute; 
-            right: 0; 
-            top: 45px;
-            background: var(--sep-rojo-obscuro); /* Fondo Rojo SEP */
-            min-width: 220px; 
-            border-radius: 4px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3); 
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1);
+            display: none; position: absolute; right: 0; top: 45px;
+            background: var(--sep-rojo-obscuro); min-width: 220px; 
+            border-radius: 4px; box-shadow: 0 8px 16px rgba(0,0,0,0.3); 
+            overflow: hidden; border: 1px solid rgba(255,255,255,0.1);
         }
         .nav-menu.show { display: block; animation: fadeIn 0.2s; }
         .nav-menu a {
-            color: white; /* Texto Blanco */
-            padding: 14px 20px; 
-            text-decoration: none;
-            display: block; 
-            font-family: 'Montserrat'; 
-            font-size: 14px;
+            color: white; padding: 14px 20px; text-decoration: none;
+            display: block; font-family: 'Montserrat'; font-size: 14px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            transition: background 0.2s;
         }
-        .nav-menu a:hover { 
-            background-color: rgba(255,255,255,0.1); /* Efecto de brillo al pasar el mouse */
-        }
+        .nav-menu a:hover { background-color: rgba(255,255,255,0.1); }
         .nav-menu a:last-child { border-bottom: none; }
 
         @keyframes fadeIn {
@@ -118,16 +102,17 @@
         }
         .header-image-container img { width: 100%; display: block; height: auto; min-height: 180px; object-fit: cover; }
 
-        /* BUSCADOR Y RESULTADOS */
+        /* CONTENIDO PRINCIPAL */
         main { flex: 1; max-width: 900px; margin: 30px auto; padding: 0 15px; width: 100%; }
         .titulos-sep { text-align: center; margin-bottom: 30px; font-family: 'Montserrat'; }
-        .titulos-sep h2 { font-weight: 700; font-size: 1.8rem; }
+        .titulos-sep h2 { color: #000; font-weight: 700; font-size: 1.8rem; margin-bottom: 5px; }
+        .titulos-sep h3 { color: #333; font-weight: 400; font-size: 1.2rem; }
         .linea-decorativa { width: 60px; height: 4px; background: var(--gob-oro); margin: 15px auto; }
 
         .search-container {
             background: #ffffff; border-top: 5px solid var(--sep-rojo-obscuro);
             border-radius: 8px; padding: 40px 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            text-align: center;
+            text-align: center; margin-bottom: 20px;
         }
         input[type="text"] {
             width: 100%; max-width: 500px; padding: 15px; border: 2px solid #ddd; 
@@ -137,15 +122,46 @@
         .btn-buscar { background: var(--sep-rojo-obscuro); color: white; padding: 12px 30px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; }
         .btn-restablecer { background: var(--gob-gris-boton); color: white; padding: 12px 30px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; }
 
+        /* ERROR */
         #errorContainer {
             display: none; background-color: var(--error-bg); border: 2px solid var(--error-rojo);
             border-radius: 6px; padding: 20px; max-width: 600px; margin: 20px auto; text-align: center;
+            font-family: 'Montserrat', sans-serif;
         }
-        #errorContainer h3 { font-family: 'Montserrat'; color: #545454; font-size: 18px; }
+        #errorContainer h3 { color: #545454; font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+        #errorContainer p { color: #545454; font-size: 20px; font-weight: 400; }
 
+        /* RESULTADOS ORIGINALES */
         #resultado { 
             display: none; margin-top: 40px; background: white; padding: 35px; 
             border-radius: 8px; border-left: 8px solid var(--estatus-verde);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .detalle-header {
+            font-family: 'Montserrat'; font-size: 1.3rem; border-bottom: 1px solid #eee;
+            padding-bottom: 10px; margin-bottom: 20px; position: relative;
+        }
+        .detalle-header::after { content: ""; position: absolute; left: 0; bottom: -1px; width: 40px; height: 4px; background: var(--gob-oro); }
+
+        .info-item { border-bottom: 1px solid #eee; padding: 12px 0; display: flex; flex-direction: column; }
+        .info-label { font-weight: 700; color: #333; font-size: 14px; font-family: 'Montserrat'; margin-bottom: 3px; }
+        .info-value { font-weight: 400; color: #555; font-size: 15px; }
+
+        .cards-flex-container { display: flex; justify-content: center; gap: 15px; margin: 25px 0; flex-wrap: wrap; }
+        .card-box {
+            flex: 1; min-width: 200px; max-width: 280px; padding: 25px 15px;
+            border-radius: 4px; border: 1px solid; text-align: center; font-family: 'Montserrat', sans-serif;
+        }
+        .card-verde { background: var(--bg-verde-tarjeta); border-color: var(--border-verde-tarjeta); color: var(--texto-verde-tarjeta); }
+        .card-azul { background: var(--bg-azul-tarjeta); border-color: var(--border-azul-tarjeta); color: var(--texto-azul-tarjeta); }
+        
+        .card-box .title { font-weight: 700; font-size: 18px; margin-bottom: 12px; }
+        .card-box .val-big { font-size: 18px; font-weight: 400; margin-bottom: 5px; }
+        .card-box .val-text { font-weight: 700; font-size: 18px; }
+
+        .aviso-info {
+            background-color: #D9F0F7; border: 1px solid #ADE1F0; padding: 20px; border-radius: 4px;
+            margin-top: 30px; font-size: 14px; color: #316B8C; line-height: 1.5; font-family: 'Montserrat';
         }
 
         /* FOOTER */
@@ -172,10 +188,7 @@
 </div>
 
 <nav class="gob-header">
-    <a href="https://www.gob.mx" target="_blank">
-        <img class="logo-gob" src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg">
-    </a>
-    
+    <a href="https://www.gob.mx" target="_blank"><img class="logo-gob" src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg"></a>
     <div class="menu-container">
         <i class="fas fa-bars menu-icon" onclick="toggleMenu()"></i>
         <div id="navMenu" class="nav-menu">
@@ -186,9 +199,7 @@
     </div>
 </nav>
 
-<div class="header-image-container">
-    <img src="logo.png" alt="SEP">
-</div>
+<div class="header-image-container"><img src="logo.png" alt="SEP"></div>
 
 <main>
     <div class="titulos-sep">
@@ -207,21 +218,22 @@
 
     <div id="errorContainer">
         <h3>Estatus del documento:</h3>
-        <p style="font-size: 20px; font-family: 'Montserrat'; color: #545454;">Folio Inválido</p>
+        <p>Folio Inválido</p>
     </div>
 
     <div id="resultado">
-        <h2 style="font-family:'Montserrat'; border-bottom:1px solid #eee; padding-bottom:10px; margin-bottom:20px;">Detalle del documento</h2>
+        <h2 class="detalle-header">Detalle del documento</h2>
         <div id="infoDetalle"></div>
-        <div id="tarjetasContainer" style="display:flex; justify-content:center; gap:15px; margin-top:20px; flex-wrap:wrap;"></div>
+        <div class="cards-flex-container" id="tarjetasContainer"></div>
+        <div class="aviso-info">
+            <strong>¡Atención!</strong> La información de los certificados que se muestran en este portal, es el resultado de la integración de información que envían las autoridades educativas de los estados y de la Ciudad de México.
+        </div>
     </div>
 </main>
 
 <footer>
     <div class="footer-container">
-        <div class="footer-col">
-            <img src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" width="150" style="filter: brightness(0) invert(1);">
-        </div>
+        <div class="footer-col"><img src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" width="150" style="filter: brightness(0) invert(1);"></div>
         <div class="footer-col">
             <h4>Enlaces</h4>
             <a href="https://participa.gob.mx">Participa</a>
@@ -250,18 +262,16 @@
     function toggleTextSize() { document.body.classList.toggle('increase-text'); }
     function resetAcc() { document.body.classList.remove('grayscale-mode', 'high-contrast', 'increase-text'); }
 
-    window.onclick = function(event) {
-        if (!event.target.matches('.menu-icon')) {
-            var menu = document.getElementById("navMenu");
-            if (menu.classList.contains('show')) menu.classList.remove('show');
-        }
-    }
+    window.onclick = function(e) { if (!e.target.matches('.menu-icon')) { var m = document.getElementById("navMenu"); if (m.classList.contains('show')) m.classList.remove('show'); } }
 
     function buscar() {
-        const f = document.getElementById('folioInput').value.trim().toUpperCase();
+        const input = document.getElementById('folioInput');
+        const f = input.value.trim().toUpperCase();
         const resDiv = document.getElementById('resultado');
         const errDiv = document.getElementById('errorContainer');
-        
+        const detalle = document.getElementById('infoDetalle');
+        const tarjetas = document.getElementById('tarjetasContainer');
+
         resDiv.style.display = 'none';
         errDiv.style.display = 'none';
 
@@ -271,17 +281,21 @@
             const d = baseDatos[f];
             let listContent = "";
             for (let clave in d) {
-                if (['promedio', 'promedio_texto', 'estatus'].includes(clave.toLowerCase())) continue;
-                listContent += `<div style="border-bottom:1px solid #eee; padding:10px 0;"><b style="font-family:Montserrat; font-size:14px;">${clave.replace(/_/g, ' ')}:</b><br><span style="font-size:15px; color:#555;">${d[clave]}</span></div>`;
+                let claveL = clave.toLowerCase();
+                if (claveL === 'promedio' || claveL === 'promedio_texto' || claveL === 'estatus') continue;
+                listContent += `<div class="info-item"><span class="info-label">${clave.replace(/_/g, ' ')}:</span><span class="info-value">${d[clave]}</span></div>`;
             }
-            document.getElementById('infoDetalle').innerHTML = listContent;
-            document.getElementById('tarjetasContainer').innerHTML = `
-                <div style="background:#E3F2E1; border:1px solid #B7D9B1; padding:20px; text-align:center; flex:1; min-width:200px; border-radius:4px;">
-                    <b style="font-family:Montserrat;">Promedio:</b><br><span style="font-size:20px;">${d.PROMEDIO || '0.0'}</span>
+            tarjetas.innerHTML = `
+                <div class="card-box card-verde">
+                    <div class="title">Promedio:</div>
+                    <div class="val-big">${d.PROMEDIO || d.promedio || '0.0'}</div>
+                    <div class="val-text">${d.PROMEDIO_TEXTO || d.promedio_texto || ''}</div>
                 </div>
-                <div style="background:#D9F0F7; border:1px solid #ADE1F0; padding:20px; text-align:center; flex:1; min-width:200px; border-radius:4px;">
-                    <b style="font-family:Montserrat;">Estatus:</b><br><span>${d.ESTATUS || 'Registrado'}</span>
+                <div class="card-box card-azul">
+                    <div class="title">Estatus del documento:</div>
+                    <div class="val-text" style="font-weight:400; margin-top:15px;">${d.ESTATUS || d.estatus || 'Registrado'}</div>
                 </div>`;
+            detalle.innerHTML = listContent;
             resDiv.style.display = 'block';
             resDiv.scrollIntoView({ behavior: 'smooth' });
         } else {
@@ -293,6 +307,15 @@
         document.getElementById('folioInput').value = "";
         document.getElementById('resultado').style.display = 'none';
         document.getElementById('errorContainer').style.display = 'none';
+    }
+
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const folioUrl = urlParams.get('folio');
+        if (folioUrl) {
+            document.getElementById('folioInput').value = folioUrl.trim().toUpperCase();
+            buscar();
+        }
     }
 </script>
 </body>
