@@ -64,7 +64,7 @@ const baseDatos = {
 
     // --- NUEVOS FOLIOS SIMULADOS (1 AL 33) ---
     "CBG3760391255": { nombre: "ARBEI GOMEZ MOLLINEDO", matricula: "1701M960101", emisor: "DIRECCION GENERAL DE BACHILLERATO QUINTANA ROO", plantel: "23EEX0001K", plan: "BACHILLERATO INTENSIVO GENERAL", promedio: "8.5", creditos: "360", estatus: "REGISTRADO", timbrado: "2017-08-29 16:20:11" },
-    "CBG3760391251": { nombre: "NEHIRY ABIGAIL VALDEZ DEL ANGEL", matricula: "1702R950202", emisor: "DIRECCION GENERAL DE BACHILLERATO DEL ESTADO DE JALISCO", plantel: "14EEX0001C", plan: "BACHILLERATO INTENSIVO GENERAL", promedio: "8.5", creditos: "360", estatus: "REGISTRADO", timbrado: "2026-08-29 16:20:11" },
+    "CBG3760391251": { nombre: "NEHIRY ABIGAIL VALDEZ DEL ANGEL", matricula: "1702R950202", emisor: "DIRECCION GENERAL DE BACHILLERATO DEL ESTADO DE JALISCO", plantel: "14EEX0001C", plan: "BACHILLERATO INTENSIVO GENERAL", promedio: "8.5", creditos: "360", estatus: "REGISTRADO", timbrado: "2025-08-29 16:20:11" },
     "CBG3760391252": { nombre: "-------------", matricula: "1703M940303", emisor: "DGB NUEVO LEÓN", plantel: "19DEX0110Q", plan: "BACHILLERATO GENERAL", promedio: "9.5", creditos: "360", estatus: "REGISTRADO", timbrado: "2026-01-18 10:10:22" },
     "CBG3760391253": { nombre: "DANIEL VARGAS ORTIZ", matricula: "1704R930404", emisor: "DGB PUEBLA", plantel: "21DEX0055V", plan: "BACHILLERATO GENERAL", promedio: "7.9", creditos: "360", estatus: "REGISTRADO", timbrado: "2026-01-18 10:15:33" },
     "CBG3760391254": { nombre: "ELENA PONCE REYES", matricula: "1705M920505", emisor: "DGB VERACRUZ", plantel: "30EEX0012C", plan: "BACHILLERATO GENERAL", promedio: "8.4", creditos: "360", estatus: "REGISTRADO", timbrado: "2026-01-18 10:20:44" },
